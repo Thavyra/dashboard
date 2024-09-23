@@ -1,5 +1,6 @@
 import NextAuth, { type DefaultSession } from "next-auth";
 import { type JWT } from "next-auth/jwt";
+import { NextResponse } from "next/server";
 
 declare module "next-auth" {
     interface User {
@@ -27,6 +28,10 @@ declare module "next-auth/jwt" {
 }
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
+    basePath: "/auth",
+    pages: {
+        signIn: "/signin"
+    },
     providers: [{
         id: "thavyra",
         name: "Thavyra",
@@ -67,8 +72,8 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
                     expires_at: account.expires_at!,
                     refresh_token: account.refresh_token
                 }
- 
-            } else if (Date.now() < token.expires_at) {
+
+            } else if (Date.now() < token.expires_at * 1000) {
 
                 return token
 
@@ -133,7 +138,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
             session.user.username = token.username
 
             return session
-        }
+        },
 
     }
 })
