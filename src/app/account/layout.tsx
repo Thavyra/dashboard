@@ -6,7 +6,7 @@ import { ReactNode } from "react";
 export default function AccountLayout({children}: {children: ReactNode}) {
     return (
         <>
-            <Nav className="mb-1.5">
+            <Nav className="mb-3">
                 <NavLink href="/account">Profile</NavLink>
                 <NavLink href="/account/transactions">Transactions</NavLink>
                 <NavLink href="/account/authorizations">Connected Apps</NavLink>
