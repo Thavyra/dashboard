@@ -18,6 +18,7 @@ const config: Config = {
         'dark-800': '#1f2937',
         'dark-750': '#2b3440',
         'dark-700': '#374151',
+        'dark-600': '#475569',
 
         'red': '#590000',
         'blue': '#000059',
@@ -34,11 +35,6 @@ const config: Config = {
         'link': {
           DEFAULT: '#0284c7',
           hover: '#0369a1'
-        },
-
-        'button': {
-          DEFAULT: '#374151',
-          hover: '#475569'
         },
 
         'positive': '#16a34a',

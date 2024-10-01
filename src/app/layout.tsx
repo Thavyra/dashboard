@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import Nav from "@/components/nav/Nav";
+import NavLink from "@/components/nav/NavLink";
 
 export const metadata: Metadata = {
   title: "Thavyra",
@@ -25,15 +27,24 @@ export default function RootLayout({
 
             </main>
             <footer className="mt-auto">
-              <hr className="border-button" />
+              <hr className="border-dark-700" />
 
-              <p className="my-5 text-center">Thavyra</p>
+              <div className="flex justify-between my-5">
+                <Nav>
+                  <NavLink href="/account" match="prefix" activeClassName="font-bold">Account</NavLink>
+                  <NavLink href="/dev" match="prefix" activeClassName="font-bold">Developer</NavLink>
+                </Nav>
+
+                <p className="">Thavyra</p>
+
+                <p>by <a className="text-bright" href="https://tobymeehan.com">Toby Meehan</a> &copy;</p>
+              </div>
             </footer>
           </div>
 
           <div className="sm:basis-2/12"></div>
         </div>
-        
+
       </body>
     </html>
   );
