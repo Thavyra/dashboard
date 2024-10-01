@@ -4,7 +4,7 @@ interface InputTextAreaProps extends TextareaHTMLAttributes<HTMLTextAreaElement>
     valid?: boolean
 }
 
-export default function InputTextArea({valid, ...props}: InputTextAreaProps) {
+export default function InputTextArea({valid, className, ...props}: InputTextAreaProps) {
     return (
         <textarea
         className={`appearance-none
@@ -14,7 +14,8 @@ export default function InputTextArea({valid, ...props}: InputTextAreaProps) {
             bg-dark-900
             transition-colors
             focus:outline-none focus:bg-dark-950
-            ${getValidClass(valid)}`}
+            ${getValidClass(valid)}
+            ${className}`}
             {...props}></textarea>
 
     )

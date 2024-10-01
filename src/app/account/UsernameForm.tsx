@@ -14,10 +14,10 @@ export default function UsernameForm({ username }: { username: string }) {
         <form action={formAction}>
             <label htmlFor="username" className="block mb-1.5">Username</label>
 
-            <div className="flex flex-row">
-                <InputText id="username" name="username" valid={state.result === "failed" ? false : undefined} defaultValue={username} required />
+            <div className="sm:flex sm:flex-row">
+                <InputText className="mb-3 sm:mb-0" id="username" name="username" valid={state.result === "failed" ? false : undefined} defaultValue={username} required />
 
-                <SubmitButton className="ml-3" />
+                <SubmitButton className="w-full sm:w-auto sm:ml-3" />
             </div>
 
             <span className="text-sm text-negative">{state.errors}</span>

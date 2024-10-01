@@ -13,10 +13,27 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="antialiased h-screen flex items-center justify-center bg-dark-850">
-        <main className="container bg-dark-800 p-10 sm:rounded text-light h-full sm:h-auto sm:min-h-[500px]">
-          {children}
-        </main>
+      <body className="antialiased box-border h-screen bg-dark-850">
+
+        <div className="h-full sm:flex sm:flex-row">
+          <div className="sm:basis-2/12"></div>
+
+          <div className="flex flex-col w-full h-full bg-dark-800 text-light px-8 sm:h-auto sm:basis-8/12 sm:rounded sm:my-10">
+            <main className="sm:overflow-scroll mb-auto">
+
+              {children}
+
+            </main>
+            <footer className="mt-auto">
+              <hr className="border-button" />
+
+              <p className="my-5 text-center">Thavyra</p>
+            </footer>
+          </div>
+
+          <div className="sm:basis-2/12"></div>
+        </div>
+        
       </body>
     </html>
   );

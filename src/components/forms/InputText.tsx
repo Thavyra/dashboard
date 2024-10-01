@@ -5,7 +5,7 @@ interface InputTextProps extends InputHTMLAttributes<HTMLInputElement> {
     valid?: boolean
 }
 
-export default function InputText({ type, valid, ...props }: InputTextProps) {
+export default function InputText({ type, valid, className, ...props }: InputTextProps) {
     return (
         <input type={type ?? "text"}
             className={`appearance-none 
@@ -15,7 +15,8 @@ export default function InputText({ type, valid, ...props }: InputTextProps) {
             bg-dark-900 
             transition-colors 
             focus:outline-none focus:bg-dark-950
-            ${getValidClass(valid)}`}
+            ${getValidClass(valid)}
+            ${className}`}
             {...props} />
     )
 

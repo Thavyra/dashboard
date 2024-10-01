@@ -10,8 +10,12 @@ export default async function Account() {
     return (
         <>
             <div className="lg:w-3/4 xl:w-1/2">
-                <UsernameForm username={user.username} />
-                <DescriptionForm description={user.description} />
+                <div className="mb-3">
+                    <UsernameForm username={user.username} />
+                </div>
+                <div>
+                    <DescriptionForm description={user.description} />
+                </div>
             </div>
         </>
     )
