@@ -1,15 +1,16 @@
 import { useFormStatus } from "react-dom"
-import Button from "../Button"
-import { ButtonHTMLAttributes } from "react"
+import Button, { ButtonProps } from "../Button"
 
-interface SubmitButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+interface SubmitButtonProps extends ButtonProps {
 
 }
 
-export default function SubmitButton({type, disabled, ...props}: SubmitButtonProps) {
+export default function SubmitButton({children, type, disabled, ...props}: SubmitButtonProps) {
     const { pending } = useFormStatus()
 
     return (
-        <Button type="submit" disabled={disabled || pending} aria-disabled={disabled || pending} {...props}>Change</Button>
+        <Button type="submit" disabled={disabled || pending} aria-disabled={disabled || pending} {...props}>
+            {children}
+        </Button>
     )
 }
