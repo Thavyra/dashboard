@@ -13,8 +13,9 @@ export default function InputText({ type, valid, className, ...props }: InputTex
             rounded
             text-lg text-light 
             bg-dark-900 
-            transition-colors 
-            focus:outline-none focus:bg-dark-950
+            transition
+            shadow-md
+            focus:outline-none focus:bg-dark-950 focus:shadow-none
             ${getValidClass(valid)}
             ${className}`}
             {...props} />
