@@ -11,11 +11,7 @@ export async function getApplications() {
 
     const data = await response.json()
 
-    return data as {
-        id: string
-        name: string
-        description: string | null
-    }[]
+    return data as Application[]
 }
 
 export async function getApplicationById(id: string) {
@@ -24,6 +20,10 @@ export async function getApplicationById(id: string) {
             tags: [`applications/${id}`]
         }
     })
+
+    if (response.status === 404) {
+        return null
+    }
 
     const data = await response.json()
 
@@ -128,7 +128,10 @@ export async function updateApplication(state: UpdateApplicationState, formData:
         }
     }
 
-    const data = validationResult.data
+    const data = {
+        ...validationResult.data,
+        description: validationResult.data.description === "" ? null : validationResult.data.description
+    }
 
     if (data.description === "") {
         data.description = undefined
@@ -167,6 +170,39 @@ export async function updateApplication(state: UpdateApplicationState, formData:
         name: application.name,
         description: application.description,
         result: "success"
+    }
+}
+
+export interface ResetClientSecretState {
+    id: string
+    secret?: string
+    result?: "success" | "failed"
+}
+
+export async function resetClientSecret(state: ResetClientSecretState, formData: FormData): Promise<ResetClientSecretState> {
+    const response = await fetchWithAuth(`/applications/${state.id}/client_secret`, {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({})
+    })
+
+    if (!response.ok) {
+        return {
+            ...state,
+            result: "failed"
+        }
+    }
+
+    const data = await response.json() as {
+        client_secret: string
+    }
+
+    return {
+        ...state,
+        result: "success",
+        secret: data.client_secret
     }
 }
 
