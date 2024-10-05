@@ -37,9 +37,20 @@ const config: Config = {
           hover: '#0369a1'
         },
 
-        'positive': '#16a34a',
-        'negative': '#dc2626',
-        'neutral': '#ca8a04'
+        'positive': {
+          DEFAULT: '#16a34a',
+          hover: '#15803d',
+          dark: '#166534'
+        },
+        'negative': {
+          DEFAULT: '#dc2626',
+          hover: '#b91c1c',
+          dark: '#991b1b'
+        },
+        'neutral': {
+          DEFAULT: '#ca8a04',
+          hover: '#a16207'
+        }
       },
     },
   },

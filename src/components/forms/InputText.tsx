@@ -11,7 +11,7 @@ export default function InputText({ type, valid, className, ...props }: InputTex
             className={`appearance-none 
             w-full py-1.5 px-3 
             rounded
-            text-lg text-light 
+            text-lg text-light placeholder:opacity-50
             bg-dark-900 
             transition
             shadow-md

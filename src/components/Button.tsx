@@ -1,16 +1,18 @@
 import React, { ButtonHTMLAttributes } from "react"
 
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-    design?: "negative"
+    design?: "negative" | "positive"
 }
 
-export default function Button({children, className, design, ...props}: ButtonProps) {
+export default function Button({children, className, design, type, ...props}: ButtonProps) {
     return (
         <button
+        type={type ?? "button"}
         className={`block transition appearance-none py-1.5 px-3 rounded text-lg 
             border ${getDesignStyle(design)}
             hover:shadow-lg
-            disabled:opacity-75
+            active:bg-dark-750
+            disabled:opacity-75 disabled:cursor-not-allowed
             ${className}`}
         {...props}>
             {children}
@@ -18,11 +20,13 @@ export default function Button({children, className, design, ...props}: ButtonPr
     )
 }
 
-function getDesignStyle(design?: "negative") {
+function getDesignStyle(design?: "negative" | "positive") {
     switch (design) {
         case undefined:
-            return "text-bright border-dark-700 hover:bg-dark-700 active:bg-dark-750"
+            return "text-bright border-dark-700 hover:border-light"
         case "negative":
-            return "text-negative border-negative hover:bg-dark-750 active:bg-dark-700"
+            return "text-negative border-negative-dark hover:border-negative"
+        case "positive":
+            return "text-positive border-positive-dark hover:border-positive"
     }
 }
