@@ -12,20 +12,20 @@ import SubmitButton from "@/components/forms/SubmitButton"
 export default function CreateButton() {
     const [showModal, setShowModal] = useState(false)
 
-    return(
+    return (
         <>
-        <Button onClick={() => setShowModal(true)}
-            className="w-full sm:w-auto">
+            <Button onClick={() => setShowModal(true)}
+                className="w-full sm:w-auto">
                 New Application</Button>
-        {showModal && createPortal(
-            <CreateModal show={showModal} setShow={setShowModal} />,
-            document.body
-        )}
+            {showModal && createPortal(
+                <CreateModal show={showModal} setShow={setShowModal} />,
+                document.body
+            )}
         </>
     )
 }
 
-function CreateModal({show, setShow}: {show: boolean, setShow: (value: boolean) => void}) {
+function CreateModal({ show, setShow }: { show: boolean, setShow: (value: boolean) => void }) {
     const [state, formAction] = useFormState(createApplication, {
         name: "",
         type: "web"
@@ -36,21 +36,22 @@ function CreateModal({show, setShow}: {show: boolean, setShow: (value: boolean) 
     }
 
     return (
-        <Modal show={show} setShow={setShow}
-        header={
-            <h3 className="text-xl">New Application</h3>
-        }>
-            <form action={formAction}>
+        <form action={formAction}>
+            <Modal show={show} setShow={setShow}
+                header={
+                    <h3 className="text-xl">New Application</h3>
+                }
+                footer={
+                    <SubmitButton>Create</SubmitButton>
+                }>
                 <div className="mb-3">
                     <label htmlFor="name" className="block mb-1.5">Name</label>
-                    <InputText id="name" name="name" valid={state.errors ? false : undefined} />
+                    <InputText id="name" name="name" autoFocus valid={state.errors ? false : undefined} />
                     <span className="text-sm text-negative">{state.errors}</span>
                 </div>
 
                 <input type="hidden" name="type" value="native" />
-
-                <SubmitButton>Create</SubmitButton>
-            </form>
-        </Modal>
+            </Modal>
+        </form>
     )
 }
