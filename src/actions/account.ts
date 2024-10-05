@@ -1,18 +1,28 @@
 "use server"
 
 import { fetchWithAuth } from "@/actions/fetch"
+import { auth } from "@/auth"
+import User from "@/models/User"
+import { signIn } from "next-auth/react"
+import { revalidateTag } from "next/cache"
 import { z } from "zod"
 
 export async function getCurrentUser() {
-    const response = await fetchWithAuth("/users/@me")
+    const session = await auth()
+
+    if (!session) {
+        await signIn()
+    }
+
+    const response = await fetchWithAuth(`/users/${session?.user.accountId}`, {
+        next: {
+            tags: [`users/${session?.user.accountId}`]
+        }
+    })
 
     const data = await response.json()
 
-    return data as {
-        id: string
-        username: string
-        description: string | null
-    }
+    return data as User
 }
 
 export interface ChangeUsernameState {
@@ -27,7 +37,7 @@ export async function changeUsername(prevState: ChangeUsernameState, formData: F
         username: z.string()
             .min(1)
             .max(40)
-            .regex(/([a-zA-Z0-9_\-\'\.]+)/)
+            .regex(/^[a-zA-Z0-9_\-\'\.]+$/)
     })
 
     const validationResult = schema.safeParse({
@@ -44,6 +54,14 @@ export async function changeUsername(prevState: ChangeUsernameState, formData: F
 
     const data = validationResult.data
 
+    if (data.username === prevState.currentUsername) {
+        return {
+            ...prevState,
+            errors: undefined,
+            result: undefined
+        }
+    }
+
     const response = await fetchWithAuth("/users/@me", {
         method: "PATCH",
         headers: {
@@ -62,8 +80,12 @@ export async function changeUsername(prevState: ChangeUsernameState, formData: F
         }
     }
 
+    const user = await response.json() as User
+
+    revalidateTag(`users/${user.id}`)
+
     return {
-        currentUsername: data.username,
+        currentUsername: user.username,
         result: "success"
     }
 }
@@ -77,7 +99,6 @@ export interface ChangeDescriptionState {
 export async function changeDescription(prevState:ChangeDescriptionState, formData: FormData): Promise<ChangeDescriptionState> {
     const schema = z.object({
         description: z.string()
-            .min(1)
             .max(400)
             .optional()
     })
@@ -94,7 +115,9 @@ export async function changeDescription(prevState:ChangeDescriptionState, formDa
         }
     }
 
-    const data = validationResult.data
+    const data = {
+        description: validationResult.data.description === "" ? null : validationResult.data.description
+    }
 
     const response = await fetchWithAuth("/users/@me", {
         method: "PATCH",
@@ -114,8 +137,12 @@ export async function changeDescription(prevState:ChangeDescriptionState, formDa
         }
     }
 
+    const user = await response.json() as User
+
+    revalidateTag(`users/${user.id}`)
+
     return {
-        currentDescription: data.description ?? null,
+        currentDescription: user.description,
         result: "success"
     }
 }

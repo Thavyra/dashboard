@@ -15,9 +15,9 @@ export default function UsernameForm({ username }: { username: string }) {
             <label htmlFor="username" className="block mb-1.5">Username</label>
 
             <div className="sm:flex sm:flex-row">
-                <InputText className="mb-3 sm:mb-0" id="username" name="username" valid={state.result === "failed" ? false : undefined} defaultValue={username} required />
+                <InputText className="mb-3 sm:mb-0" id="username" name="username" valid={state.result === "failed" ? false : undefined} defaultValue={state.currentUsername} required />
 
-                <SubmitButton className="w-full sm:w-auto sm:ml-3" />
+                <SubmitButton className="w-full sm:w-auto sm:ml-3">Change</SubmitButton>
             </div>
 
             <span className="text-sm text-negative">{state.errors}</span>

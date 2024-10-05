@@ -10,13 +10,15 @@ export default function DescriptionForm({ description }: { description: string |
 
     return (
         <form action={formAction}>
-            <label htmlFor="description" className="block mb-1.5">Description</label>
+            <div className="mb-3">
+                <label htmlFor="description" className="block mb-1.5">Description</label>
 
-            <InputTextArea className="mb-3" rows={4} id="description" name="description" valid={state.result === "failed" ? false : undefined} defaultValue={description ?? ""} />
+                <InputTextArea rows={4} id="description" name="description" valid={state.result === "failed" ? false : undefined} defaultValue={description ?? ""} />
 
-            <span className="text-sm text-negative">{state.errors}</span>
+                <span className="text-sm text-negative">{state.errors}</span>
+            </div>
 
-            <SubmitButton className="w-full sm:w-auto" />
+            <SubmitButton className="w-full sm:w-auto">Save</SubmitButton>
         </form>
     )
 }

@@ -4,22 +4,21 @@ import { NextResponse } from "next/server";
 
 declare module "next-auth" {
     interface User {
-        username: string
+        sub: string
     }
 
     interface Session {
         error?: "RefreshTokenError",
         access_token: string,
         user: {
-            username: string
+            accountId: string
         } & DefaultSession["user"]
     }
 }
 
 declare module "next-auth/jwt" {
     interface JWT {
-        id: string
-        username: string
+        accountId: string
         access_token: string
         expires_at: number
         refresh_token?: string
@@ -39,38 +38,28 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
 
         authorization: {
             params: {
-                scope: "openid account.profile applications"
-            }
-        },
-
-        async profile(profile) {
-            return {
-                ...profile,
-                id: profile.sub,
-                username: profile.username
+                scope: "openid sudo account applications authorizations"
             }
         }
     }],
 
     callbacks: {
 
-        async jwt({ token, account, user }) {
+        async jwt({ token, account }) {
 
             if (account) { // First time login
 
                 return {
                     ...token,
 
-                    id: user.id!,
-                    username: user.username,
+                    accountId: account.providerAccountId,
 
                     access_token: account.access_token!,
-                    expires_at: account.expires_at!,
-                    refresh_token: account.refresh_token
+                    expires_at: account.expires_at!
                 }
 
             } else if (Date.now() < token.expires_at * 1000) {
-
+                
                 return token
 
             } else {
@@ -87,8 +76,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
             session.access_token = token.access_token
             session.error = token.error
 
-            session.user.id = token.id,
-            session.user.username = token.username
+            session.user.accountId = token.accountId
 
             return session
         },

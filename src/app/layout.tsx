@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import NavLink from "@/components/nav/NavLink";
-import { auth, signOut } from "@/auth";
+import { signOut } from "@/auth";
+import { getCurrentUser } from "@/actions/account";
 
 export const metadata: Metadata = {
   title: "Thavyra",
@@ -13,14 +14,14 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const user = await auth()
+  const user = await getCurrentUser()
 
   return (
     <html lang="en">
       <body className="antialiased box-border h-screen bg-dark-850">
 
         <div className="h-full sm:flex sm:flex-row sm:py-10">
-          <div className="h-full flex flex-col bg-dark-800 text-light px-8 sm:basis-8/12 sm:mx-auto sm:rounded">
+          <div className="h-full flex flex-col bg-dark-800 text-light px-8 sm:basis-8/12 sm:mx-auto sm:rounded sm:shadow-xl">
 
             <main className="h-full">
 
@@ -35,7 +36,7 @@ export default async function RootLayout({
 
                 <nav className="mb-0 sm:flex sm:justify-center sm:gap-2 sm:mb-3 md:mb-0 md:mr-auto md:gap-4">
 
-                  <span className="text-center text-bright block mb-3 sm:mb-0">{user?.user.username}</span>
+                  <span className="text-center text-bright block mb-3 sm:mb-0">{user.username}</span>
 
                   <NavLink href="/account" match="prefix" activeClassName="font-bold"
                     className="text-center block mb-3 sm:mb-0">Account</NavLink>
