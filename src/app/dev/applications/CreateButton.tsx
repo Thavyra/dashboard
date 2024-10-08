@@ -4,10 +4,10 @@ import Button from "@/components/Button"
 import { useState } from "react"
 import { createPortal, useFormState } from "react-dom"
 import { redirect } from "next/navigation"
-import { createApplication } from "@/actions/applications"
 import Modal from "@/components/Modal"
 import InputText from "@/components/forms/InputText"
 import SubmitButton from "@/components/forms/SubmitButton"
+import { createApplication } from "@/actions/application/create"
 
 export default function CreateButton() {
     const [showModal, setShowModal] = useState(false)
@@ -26,13 +26,10 @@ export default function CreateButton() {
 }
 
 function CreateModal({ show, setShow }: { show: boolean, setShow: (value: boolean) => void }) {
-    const [state, formAction] = useFormState(createApplication, {
-        name: "",
-        type: "web"
-    })
+    const [state, formAction] = useFormState(createApplication, {})
 
-    if (state.id) {
-        redirect(`/dev/applications/${state.id}`)
+    if (state.result?.status === "success") {
+        redirect(`/dev/applications/${state.result.id}`)
     }
 
     return (
@@ -44,10 +41,18 @@ function CreateModal({ show, setShow }: { show: boolean, setShow: (value: boolea
                 footer={
                     <SubmitButton>Create</SubmitButton>
                 }>
+
+                {state.message &&
+                    <div className="mb-3 py-1 px-2 rounded transition border border-negative text-negative">
+                        {state.message}
+                    </div>
+                }
+
+
                 <div className="mb-3">
                     <label htmlFor="name" className="block mb-1.5">Name</label>
-                    <InputText id="name" name="name" autoFocus valid={state.errors ? false : undefined} />
-                    <span className="text-sm text-negative">{state.errors}</span>
+                    <InputText id="name" name="name" autoFocus valid={state.result?.status === "failed" ? false : undefined} />
+                    <span className="text-sm text-negative">{state.errors?.name}</span>
                 </div>
 
                 <input type="hidden" name="type" value="native" />

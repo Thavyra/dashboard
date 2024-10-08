@@ -1,6 +1,6 @@
 import { Suspense } from "react";
-import ApplicationList from "./ApplicationList";
 import CreateButton from "./CreateButton";
+import { Applications, ApplicationsSkeleton } from "./Applications";
 
 export default function Page() {
     return (
@@ -10,8 +10,8 @@ export default function Page() {
                 <CreateButton />
             </div>
 
-            <Suspense fallback={<p>Loading applications...</p>}>
-                <ApplicationList />
+            <Suspense fallback={<ApplicationsSkeleton />}>
+                <Applications />
             </Suspense>
         </>
     )

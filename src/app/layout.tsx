@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import NavLink from "@/components/nav/NavLink";
 import { signOut } from "@/auth";
-import { getCurrentUser } from "@/actions/account";
+import { fetchCurrentUser } from "@/data/account";
 
 export const metadata: Metadata = {
   title: "Thavyra",
@@ -14,29 +14,28 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const user = await getCurrentUser()
-
   return (
     <html lang="en">
-      <body className="antialiased box-border h-screen bg-dark-850">
+      <body className="antialiased box-border bg-dark-850">
 
-        <div className="h-full sm:flex sm:flex-row sm:py-10">
-          <div className="h-full flex flex-col bg-dark-800 text-light px-8 sm:basis-8/12 sm:mx-auto sm:rounded sm:shadow-xl">
+        <div className="min-h-screen flex sm:py-10">
+          <div className="container flex flex-col px-8 xl:max-w-7xl bg-dark-800 text-light
+          sm:mx-auto sm:rounded sm:shadow-xl">
 
-            <main className="h-full">
+            <main className="flex-grow">
 
               {children}
 
             </main>
 
-            <footer className="mt-auto">
+            <footer>
               <hr className="border-dark-700" />
 
               <div className="my-5 md:flex md:flex-row">
 
                 <nav className="mb-0 sm:flex sm:justify-center sm:gap-2 sm:mb-3 md:mb-0 md:mr-auto md:gap-4">
 
-                  <span className="text-center text-bright block mb-3 sm:mb-0">{user.username}</span>
+                  <span className="text-center text-bright block mb-3 sm:mb-0"></span>
 
                   <NavLink href="/account" match="prefix" activeClassName="font-bold"
                     className="text-center block mb-3 sm:mb-0">Account</NavLink>

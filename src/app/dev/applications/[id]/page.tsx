@@ -1,13 +1,15 @@
 import { Suspense } from "react";
-import Details from "./Details";
-import { getApplicationById } from "@/actions/applications";
+import { Details, DetailsSkeleton } from "./Details";
 
-export default async function Page({ params }: { params: { id: string } }) {
+export default function Page({ params }: { params: { id: string } }) {
     return (
         <>
-            <Suspense fallback={<p>Loading...</p>}>
-                <Details application={await getApplicationById(params.id)} />
-            </Suspense>
+            <div className="mb-3">
+                <Suspense fallback={<DetailsSkeleton />}>
+                    <Details applicationId={params.id} />
+                </Suspense>
+            </div>
         </>
     )
 }
+
