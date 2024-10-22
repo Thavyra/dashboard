@@ -21,7 +21,7 @@ export async function resetClientSecret(state: ResetClientSecretState, formData:
     }
 
     try {
-        const response = await putBackend<{ client_secret: string }>(session, `/applications/${state.id}/client_secret`)
+        const response = await putBackend<{ client_secret: string }>(session, `/applications/${state.id}/client_secret`, {})
 
         switch (response.status) {
             case 200:
