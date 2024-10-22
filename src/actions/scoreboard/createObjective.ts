@@ -3,6 +3,7 @@
 import { auth } from "@/auth"
 import { postBackend } from "@/data/fetch"
 import Objective from "@/models/Objective"
+import { revalidatePath, revalidateTag } from "next/cache"
 import { z } from "zod"
 
 export interface CreateObjectiveState {
@@ -50,7 +51,10 @@ export async function createObjective(state: CreateObjectiveState, formData: For
         }
     }
 
-    const request = validationResult.data
+    const request = {
+        name: validationResult.data.name,
+        display_name: validationResult.data.displayName
+    }
 
     try {
 
@@ -58,6 +62,10 @@ export async function createObjective(state: CreateObjectiveState, formData: For
 
         switch (response.status) {
             case 201:
+
+                revalidateTag(`applications:${state.applicationId}:objectives`)
+                revalidatePath(`/dev/applications/${state.applicationId}/scoreboard`)
+
                 return {
                     applicationId: state.applicationId,
                     result: {
