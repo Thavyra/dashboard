@@ -1,3 +1,5 @@
+import Permission from "./Permission"
+
 export default interface Application {
     id: string
     owner_id: string
@@ -5,7 +7,9 @@ export default interface Application {
     name: string
     description: string | null
 
-    client_id: string
+    client_id?: string
 
     created_at: Date
+
+    permissions?: Permission[]
 }
