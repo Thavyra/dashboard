@@ -2,10 +2,11 @@ import { auth, signIn } from "@/auth";
 import Button from "@/components/Button";
 import InputText from "@/components/forms/InputText";
 import InputTextArea from "@/components/forms/InputTextArea";
-import { fetchApplicationById } from "@/data/application";
+import { fetchApplicationById, fetchPermissionsByApplication } from "@/data/application";
 import Application from "@/models/Application";
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import DetailsForm from "./DetailsForm";
+import Permission from "@/models/Permission";
 import { DeleteButton } from "./DeleteButton";
 
 export function DetailsSkeleton() {
@@ -21,11 +22,9 @@ export function DetailsSkeleton() {
                 <InputTextArea disabled rows={4} className="animate-pulse" />
             </div>
 
-            <Button disabled className="w-full mb-3 sm:w-auto">Save</Button>
 
-            <div className="flex flex-row justify-end">
-                <Button disabled className="w-full sm:w-auto" design="negative">Delete</Button>
-            </div>
+
+            <Button disabled className="w-full mb-3 sm:w-auto">Save</Button>
         </>
     )
 }
@@ -37,25 +36,28 @@ export async function Details({ applicationId }: { applicationId: string }) {
         return await signIn()
     }
 
-    const result = await fetchApplicationById(session, applicationId)
+    const applicationResult = await fetchApplicationById(session, applicationId)
+    const permissionResult = await fetchPermissionsByApplication(session, applicationId)
 
-    switch (result.status) {
-        case "success":
-            return <Loaded application={result.application} />
-        case "notfound":
-            notFound()
-        default:
-            throw new Error()
+    if (applicationResult.status === "success" && permissionResult.status === "success") {
+        if (applicationResult.application.owner_id !== session.user.accountId) {
+            redirect("/dev/applications")
+        }
+
+        return <Loaded application={applicationResult.application} permissions={permissionResult.permissions} />
     }
+
+    if (applicationResult.status === "notfound") {
+        notFound()
+    }
+
+    throw new Error()
 }
 
-function Loaded({ application }: { application: Application }) {
-    
-
+function Loaded({ application, permissions }: { application: Application, permissions: Permission[] }) {
     return (
         <>
-            <DetailsForm application={application} />
-
+            <DetailsForm application={application} permissions={permissions} />
             <DeleteButton application={application} />
         </>
     )

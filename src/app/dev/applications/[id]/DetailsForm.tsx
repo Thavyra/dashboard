@@ -5,13 +5,16 @@ import InputText from "@/components/forms/InputText"
 import InputTextArea from "@/components/forms/InputTextArea"
 import SubmitButton from "@/components/forms/SubmitButton"
 import Application from "@/models/Application"
+import Permission from "@/models/Permission"
 import { useFormState } from "react-dom"
+import ScopePermissions from "./ScopePermissions"
 
-export default function DetailsForm({ application }: { application: Application }) {
+export default function DetailsForm({ application, permissions }: { application: Application, permissions: Permission[] }) {
     const [state, formAction] = useFormState(updateApplication, {
         id: application.id,
         name: application.name,
-        description: application.description
+        description: application.description,
+        permissions
     })
 
     return (
@@ -29,8 +32,21 @@ export default function DetailsForm({ application }: { application: Application 
                 <span className="text-sm text-negative">{state.errors?.description}</span>
             </div>
 
-            <SubmitButton className="w-full mb-3 sm:w-auto sm:mb-0">Save</SubmitButton>
+            <hr className="border-dark-700 my-3" />
 
+            <h3 className="text-lg font-light mb-3">Permissions</h3>
+
+            <ScopePermissions permissions={state.permissions} errors={state.errors?.permissions} />
+
+            <div className="sm:flex sm:flex-row sm:items-center gap-3">
+                <SubmitButton className="w-full mb-3 sm:w-auto sm:mb-0">Save</SubmitButton>
+                {state.message &&
+                    <span className="text-negative">
+                        {state.message}
+                    </span>
+                }
+            </div>
+            
         </form>
     )
 }

@@ -2,6 +2,7 @@ import { Session } from "next-auth";
 import { getBackend } from "./fetch";
 import Application from "@/models/Application";
 import Redirect from "@/models/Redirect";
+import Permission from "@/models/Permission";
 
 export async function fetchApplicationsByUser(session: Session): Promise<{
     status: "success"
@@ -54,6 +55,26 @@ export async function fetchRedirectsByApplication(session: Session, applicationI
     switch (response.status) {
         case 200:
             return { status: "success", redirects: response.data }
+        default:
+            return { status: "failed" }
+    }
+}
+
+export async function fetchPermissionsByApplication(session: Session, applicationId: string): Promise<{
+    status: "success"
+    permissions: Permission[]
+} | {
+    status: "failed"
+}> {
+    const response = await getBackend<Permission[]>(session, `/applications/${applicationId}/permissions`, {
+        next: {
+            tags: [`application:${applicationId}:permissions`]
+        }
+    })
+
+    switch (response.status) {
+        case 200:
+            return { status: "success", permissions: response.data }
         default:
             return { status: "failed" }
     }

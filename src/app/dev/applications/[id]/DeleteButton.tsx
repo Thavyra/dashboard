@@ -44,7 +44,7 @@ function DeleteModal({ show, setShow, application }: {
         <form action={formAction}>
             <Modal show={show} setShow={setShow}
                 header={
-                    <h3 className="text-xl">Delete {application.name}</h3>
+                    <h3 className="text-xl">Delete <span className="font-bold">{application.name}</span></h3>
                 }
                 footer={
                     <SubmitButton design="negative">Delete</SubmitButton>
