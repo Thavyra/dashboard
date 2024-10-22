@@ -1,7 +1,7 @@
 "use server"
 
 import { auth } from "@/auth"
-import { patchBackend } from "@/data/fetch"
+import { getBackend, patchBackend } from "@/data/fetch"
 import User from "@/models/User"
 import { z } from "zod"
 
@@ -20,6 +20,43 @@ const UsernameValidator = z.object({
         .max(40)
         .regex(/^[a-zA-Z0-9_\-\'\.]+$/)
 })
+
+export async function validateUsername(username: string, currentUsername: string): Promise<{valid?: boolean, errors?: string[]}> {
+    if (currentUsername === username) {
+        return { valid: undefined }
+    }
+
+    const validationResult = UsernameValidator.safeParse({ username })
+
+    if (!validationResult.success) {
+        return {
+            valid: false,
+            errors: validationResult.error.flatten().fieldErrors.username
+        }
+    }
+
+    const session = await auth()
+
+    if (!session) {
+        return {
+            valid: false,
+            errors: ["Not authenticated."]
+        }
+    }
+
+    const response = await getBackend(session, `/users/@${validationResult.data.username}`)
+
+    switch (response.status) {
+        case 404:
+            return { valid: true }
+        case 200:
+            return { valid: false, errors: ["Username already taken!"] }
+        default:
+            return { valid: undefined }
+    }
+
+
+}
 
 export async function changeUsername(state: ChangeUsernameState, formData: FormData): Promise<ChangeUsernameState> {
     const session = await auth()
