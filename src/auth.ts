@@ -4,15 +4,11 @@ import { NextResponse } from "next/server";
 
 declare module "next-auth" {
     interface User {
-        sub: string
     }
 
     interface Session {
         error?: "RefreshTokenError",
-        access_token: string,
-        user: {
-            accountId: string
-        } & DefaultSession["user"]
+        access_token: string
     }
 }
 
@@ -45,7 +41,9 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
 
     callbacks: {
 
-        async jwt({ token, account }) {
+        async jwt({ token, account, profile }) {
+
+            console.log(profile)
 
             if (account) { // First time login
 
@@ -53,6 +51,9 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
                     ...token,
 
                     accountId: account.providerAccountId,
+                    sub: account.providerAccountId,
+                    name: profile?.name,
+                    picture: profile?.picture,
 
                     access_token: account.access_token!,
                     expires_at: account.expires_at!
@@ -72,11 +73,13 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         },
 
         async session({ session, token }) {
-
+            
             session.access_token = token.access_token
             session.error = token.error
 
-            session.user.accountId = token.accountId
+            session.user.id = token.accountId
+            session.user.name = token.name
+            session.user.image = token.picture
 
             return session
         },

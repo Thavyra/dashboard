@@ -11,7 +11,7 @@ export async function fetchCurrentUser(session: Session): Promise<{
 } | {
     status: "failed"
 }> {
-    const response = await getBackend<User>(session, `/users/${session.user.accountId}`)
+    const response = await getBackend<User>(session, `/users/${session.user?.id}`)
 
     switch (response.status) {
         case 200:
@@ -27,7 +27,7 @@ export async function fetchLoginsByUser(session: Session): Promise<{
 } | {
     status: "failed"
 }> {
-    const response = await getBackend<Login[]>(session, `/users/${session.user.accountId}/logins`)
+    const response = await getBackend<Login[]>(session, `/users/${session.user?.id}/logins`)
 
     switch (response.status) {
         case 200:
@@ -43,7 +43,7 @@ export async function fetchTransactionsByUser(session: Session): Promise<{
 } | {
     status: "failed"
 }> {
-    const response = await getBackend<Transaction[]>(session, `/users/${session.user.accountId}/transactions`)
+    const response = await getBackend<Transaction[]>(session, `/users/${session.user?.id}/transactions`)
 
     switch (response.status) {
         case 200:
@@ -59,9 +59,9 @@ export async function fetchAuthorizationsByUser(session: Session): Promise<{
 } | {
     status: "failed"
 }> {
-    const response = await getBackend<Authorization[]>(session, `/users/${session.user.accountId}/authorizations`, {
+    const response = await getBackend<Authorization[]>(session, `/users/${session.user?.id}/authorizations`, {
         next: {
-            tags: [`users:${session.user.accountId}:authorizations`]
+            tags: [`users:${session.user?.id}:authorizations`]
         }
     })
 

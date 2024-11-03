@@ -61,7 +61,7 @@ export async function changePassword(state: ChangePasswordState, formData: FormD
 
     try {
 
-        const response = await putBackend<PasswordLogin>(session, `/users/${session.user.accountId}/logins/@password`, request)
+        const response = await putBackend<PasswordLogin>(session, `/users/${session.user?.id}/logins/@password`, request)
 
         switch (response.status) {
             case 200:

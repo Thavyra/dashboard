@@ -39,8 +39,10 @@ export async function Details({ applicationId }: { applicationId: string }) {
     const applicationResult = await fetchApplicationById(session, applicationId)
     const permissionResult = await fetchPermissionsByApplication(session, applicationId)
 
-    if (applicationResult.status === "success" && permissionResult.status === "success") {
-        if (applicationResult.application.owner_id !== session.user.accountId) {
+    if (applicationResult.status === "success") {
+        if (applicationResult.application.owner_id !== session.user?.id
+            || permissionResult.status !== "success"
+        ) {
             redirect("/dev/applications")
         }
 

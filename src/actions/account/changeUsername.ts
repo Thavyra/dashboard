@@ -23,7 +23,7 @@ const UsernameValidator = z.object({
 
 export async function validateUsername(username: string, currentUsername: string): Promise<{valid?: boolean, errors?: string[]}> {
     if (currentUsername === username) {
-        return { valid: undefined }
+        return { }
     }
 
     const validationResult = UsernameValidator.safeParse({ username })
@@ -50,9 +50,9 @@ export async function validateUsername(username: string, currentUsername: string
         case 404:
             return { valid: true }
         case 200:
-            return { valid: false, errors: ["Username already taken!"] }
+            return { valid: false, errors: [`${validationResult.data.username} is not available!`] }
         default:
-            return { valid: undefined }
+            return { }
     }
 
 
@@ -91,12 +91,12 @@ export async function changeUsername(state: ChangeUsernameState, formData: FormD
 
     try {
 
-        const response = await patchBackend<User>(session, `/users/${session.user.accountId}`, request)
+        const response = await patchBackend<User>(session, `/users/${session.user?.id}`, request)
 
         switch (response.status) {
             case 200:
                 return {
-                    username: response.data.username,
+                    username: response.data.username!,
                     result: { status: "success" }
                 }
             case 400:

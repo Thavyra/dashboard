@@ -10,7 +10,7 @@ export async function fetchApplicationsByUser(session: Session): Promise<{
 } | {
     status: "failed"
 }> {
-    const response = await getBackend<Application[]>(session, `/users/${session.user.accountId}/applications`)
+    const response = await getBackend<Application[]>(session, `/users/${session.user?.id}/applications`)
 
     switch (response.status) {
         case 200:

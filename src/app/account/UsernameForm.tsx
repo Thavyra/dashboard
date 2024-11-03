@@ -7,7 +7,7 @@ import { changeUsername, validateUsername } from "@/actions/account/changeUserna
 import { useState } from "react"
 
 export default function UsernameForm({ username }: { username: string }) {
-    const [state, formAction] = useFormState(changeUsername, { username: username })
+    const [state, formAction] = useFormState(changeUsername, { username })
     const [validationState, setValidationState] = useState<{ valid?: boolean, errors?: string[] }>({ valid: undefined, errors: undefined })
 
     const isValid = (state.errors?.username ? false : undefined) || validationState.valid
@@ -24,7 +24,7 @@ export default function UsernameForm({ username }: { username: string }) {
                             setValidationState(result)
                         }}
                         valid={isValid} defaultValue={state.username} required maxLength={40} />
-                    <span className="text-sm text-negative">{state.errors?.username ?? validationState.errors}</span>
+                    <span className="text-sm text-negative">{state.errors?.username?.at(0) ?? validationState.errors?.at(0)}</span>
                 </div>
 
                 <SubmitButton className="w-full sm:w-auto sm:ml-3 sm:mb-auto" disabled={isValid === false}>

@@ -49,7 +49,7 @@ export async function changeDescription(state: ChangeDescriptionState, formData:
 
     try {
 
-        const response = await patchBackend<User>(session, `/users/${session.user.accountId}`, request)
+        const response = await patchBackend<User>(session, `/users/${session.user?.id}`, request)
 
         switch (response.status) {
             case 200:

@@ -29,7 +29,7 @@ function Loaded({ user }: { user: User }) {
     return (
         <div className="lg:w-3/4 xl:w-1/2">
             <div className="mb-3">
-                <UsernameForm username={user.username} />
+                <UsernameForm username={user.username ?? ""} />
             </div>
             <div className="mb-3">
                 <DescriptionForm description={user.description} />
