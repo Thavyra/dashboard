@@ -1,6 +1,7 @@
 import { auth, signIn } from "@/auth";
 import { fetchApplicationsByUser } from "@/data/application";
 import Application from "@/models/Application";
+import Image from "next/image";
 import Link from "next/link";
 
 export async function Applications() {
@@ -28,7 +29,8 @@ function Loaded({ applications }: { applications: Application[] }) {
                     <Link key={application.id} href={`/dev/applications/${application.id}`}
                         className={"block w-auto p-3 rounded text-center text-bright transition border border-dark-700 " +
                             "hover:bg-dark-700 hover:shadow-lg active:bg-dark-750"}>
-                        <h4>{application.name}</h4>
+                        <Image src={`${process.env.THAVYRA_API_URL}/applications/${application.id}/icon.png?size=128`} alt="Icon" width={128} height={128} className="mx-auto" />
+                        <h4 className="mt-3">{application.name}</h4>
                     </Link>
                 )
             })}

@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import NavLink from "@/components/nav/NavLink";
 import { signOut } from "@/auth";
-import { fetchCurrentUser } from "@/data/account";
+import CurrentUserBadge from "@/components/CurrentUserBadge";
 
 export const metadata: Metadata = {
   title: "Thavyra",
@@ -35,7 +35,9 @@ export default async function RootLayout({
 
                 <nav className="mb-0 sm:flex sm:justify-center sm:gap-2 sm:mb-3 md:mb-0 md:mr-auto md:gap-4">
 
-                  <span className="text-center text-bright block mb-3 sm:mb-0"></span>
+                  <span className="text-center block mb-3 sm:mb-0">
+                    <CurrentUserBadge />
+                  </span>
 
                   <NavLink href="/account" match="prefix" activeClassName="font-bold"
                     className="text-center block mb-3 sm:mb-0">Account</NavLink>
@@ -45,7 +47,7 @@ export default async function RootLayout({
 
                   <form action={async () => {
                     "use server"
-                    await signOut({redirectTo: "/"})
+                    await signOut({ redirectTo: "/" })
                   }}>
                     <button className="text-center w-full mb-3 sm:mb-0 sm:inline" type="submit">Logout</button>
                   </form>
