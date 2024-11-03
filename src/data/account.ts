@@ -3,6 +3,7 @@ import { Session } from "next-auth";
 import { getBackend } from "./fetch";
 import { Transaction } from "@/models/Transaction";
 import { Authorization } from "@/models/Authorization";
+import { Login } from "@/models/Login";
 
 export async function fetchCurrentUser(session: Session): Promise<{
     status: "success"
@@ -15,6 +16,22 @@ export async function fetchCurrentUser(session: Session): Promise<{
     switch (response.status) {
         case 200:
             return { status: "success", user: response.data }
+        default:
+            return { status: "failed" }
+    }
+}
+
+export async function fetchLoginsByUser(session: Session): Promise<{
+    status: "success"
+    logins: Login[]
+} | {
+    status: "failed"
+}> {
+    const response = await getBackend<Login[]>(session, `/users/${session.user.accountId}/logins`)
+
+    switch (response.status) {
+        case 200:
+            return { status: "success", logins: response.data }
         default:
             return { status: "failed" }
     }
