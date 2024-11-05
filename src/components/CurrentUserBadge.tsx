@@ -19,7 +19,7 @@ export default async function CurrentUserBadge() {
 
     return (
         <span className="inline-flex flex-row text-bright">
-            <Image src={session.user?.image ?? `${process.env.THAVYRA_API_URL}/users/${user.id}/avatar.png?size=128`} alt="Avatar" height={128} width={128} className="mr-2 h-6 w-6" />
+            <Image src={`/avatars/${user.id}`} alt="Avatar" height={128} width={128} className="rounded-full mr-2 h-6 w-6" />
             {user.username ?? session.user?.name}
         </span>
     )

@@ -1,5 +1,9 @@
 import { Session } from "next-auth";
 
+type Body =
+    | { type: "json", data: any }
+    | { type: "form", data: FormData }
+
 type FetchResult =
     | OkResult
     | FailedResult
@@ -118,7 +122,7 @@ async function fetchBackend(session: Session, path: string, body?: any, init?: R
         "Authorization": `Bearer ${session.access_token}`
     }
 
-    if (body) {
+    if (body && !(body instanceof FormData)) {
         headers = {
             ...headers,
             "Content-Type": "application/json"
@@ -128,7 +132,8 @@ async function fetchBackend(session: Session, path: string, body?: any, init?: R
     const response = await fetch(process.env.THAVYRA_API_URL + path, {
         ...init,
         headers: headers,
-        body: JSON.stringify(body)
+        body: body instanceof FormData ? body
+            : JSON.stringify(body)
     })
 
     try {

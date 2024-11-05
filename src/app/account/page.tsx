@@ -1,6 +1,7 @@
 import { Suspense } from "react"
 import { Details, DetailsSkeleton } from "./Details"
 import { Providers } from "./Providers"
+import AvatarInfo from "@/components/dashboard/account/profile/AvatarInfo"
 
 export default async function Account({ searchParams }: {
     searchParams: {
@@ -9,18 +10,23 @@ export default async function Account({ searchParams }: {
     }
 }) {
     return (
-        <>
-            <Suspense fallback={<DetailsSkeleton />}>
-                <Details />
-            </Suspense>
+        <div className="sm:flex sm:flex-row">
+            <div className="me-3">
+                <AvatarInfo />
+            </div>
+            <div className="flex-grow">
+                <Suspense fallback={<DetailsSkeleton />}>
+                    <Details />
+                </Suspense>
 
-            <h2 className="text-xl font-light mb-3">Logins</h2>
+                <h2 className="text-xl font-light mb-3">Logins</h2>
 
-            <Suspense>
-                <Providers errors={searchParams} />
-            </Suspense>
+                <Suspense>
+                    <Providers errors={searchParams} />
+                </Suspense>
 
-            <div className="mb-3"></div>
-        </>
+                <div className="mb-3"></div>
+            </div>
+        </div>
     )
 }

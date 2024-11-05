@@ -43,8 +43,6 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
 
         async jwt({ token, account, profile }) {
 
-            console.log(profile)
-
             if (account) { // First time login
 
                 return {
