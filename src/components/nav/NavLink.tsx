@@ -4,9 +4,11 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { ReactNode } from "react";
 
+export type NavLinkMatch = "all" | "prefix"
+
 export interface NavLinkProps {
     href: string,
-    match?: "all" | "prefix",
+    match?: NavLinkMatch,
     className?: string,
     activeClassName?: string,
     inactiveClassName?: string,

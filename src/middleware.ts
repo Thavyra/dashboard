@@ -5,17 +5,17 @@ export default auth((request) => {
 
     const { pathname } = request.nextUrl
 
-    if (pathname.startsWith("/auth") || pathname.startsWith("/signin")) {
+    if (!pathname.startsWith("/dashboard")) {
         return NextResponse.next()
     }
 
     if (!request.auth) {
-        const url = new URL("/signin", request.nextUrl.origin)
+        const url = new URL("/auth/login", request.nextUrl.origin)
         return Response.redirect(url)
     }
 
     if (request.auth.error === "RefreshTokenError") {
-        const url = new URL("/signin", request.nextUrl.origin)
+        const url = new URL("/auth/login", request.nextUrl.origin)
 
         url.searchParams.set("prompt", "none")
 

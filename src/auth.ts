@@ -23,9 +23,9 @@ declare module "next-auth/jwt" {
 }
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
-    basePath: "/auth",
+    basePath: "/auth/internal",
     pages: {
-        signIn: "/signin"
+        signIn: "/auth/login"
     },
     providers: [{
         id: "thavyra",
