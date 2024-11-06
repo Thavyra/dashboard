@@ -47,7 +47,7 @@ const config: Config = {
           hover: '#b91c1c',
           dark: '#991b1b'
         },
-        'neutral': {
+        'cautious': {
           DEFAULT: '#ca8a04',
           hover: '#a16207'
         }

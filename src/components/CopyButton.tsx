@@ -19,7 +19,7 @@ export default function CopyButton({ text, ...props }: CopyButtonProps) {
     }
 
     return (
-        <Button design={copied ? "positive" : undefined} onClick={writeText} {...props}>
+        <Button appearance={copied ? "positive" : undefined} onClick={writeText} {...props}>
             {
                 copied ? <>Copied!</>
                 : <>Copy</>

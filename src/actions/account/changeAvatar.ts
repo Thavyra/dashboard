@@ -48,13 +48,12 @@ export async function changeAvatar(state: ChangeAvatarState, formData: FormData)
 
     try {
 
-        var response = await putBackend(session, `/users/${state.userId}/avatar`, data)
+        const response = await putBackend(session, `/users/${state.userId}/avatar`, data)
 
         switch (response.status) {
             case 201:
                 revalidateTag(`avatars:${state.userId}`)
                 revalidatePath(`/avatars/${state.userId}`)
-                revalidatePath("/account")
 
                 return {
                     userId: state.userId,
@@ -85,7 +84,7 @@ export async function changeAvatar(state: ChangeAvatarState, formData: FormData)
             userId: state.userId,
             cacheVersion: state.cacheVersion,
             result: { status: "failed" },
-            message: "Failed to change avatar."
+            message: "Failed to upload avatar."
         }
 
     }

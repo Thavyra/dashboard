@@ -5,7 +5,7 @@ import InputTextArea from "@/components/forms/InputTextArea"
 import SubmitButton from "@/components/forms/SubmitButton"
 import { useFormState } from "react-dom"
 
-export default function DescriptionForm({ description }: { description: string | null }) {
+export default function DescriptionForm({description}: {description: string | null}) {
     const [state, formAction] = useFormState(changeDescription, { description: description })
 
     return (

@@ -5,12 +5,12 @@ import SubmitButton from "@/components/forms/SubmitButton";
 import { Authorization } from "@/models/Authorization";
 import { useFormState } from "react-dom";
 
-export default function DeleteButton({ authorization }: { authorization: Authorization }) {
-    const [state, formAction] = useFormState(revokeAuthorization, { authorization })
+export default function RevokeForm({authorization} : {authorization: Authorization}) {
+    const [state, formAction] = useFormState(revokeAuthorization, {authorization})
 
     return (
-        <form action={formAction}>
-            <SubmitButton design="negative">Revoke</SubmitButton>
+        <form action={formAction} className="ml-auto">
+            <SubmitButton appearance="negative">Revoke</SubmitButton>
             <span className="text-sm text-negative">{state.message}</span>
         </form>
     )

@@ -27,7 +27,7 @@ export default function InputAvatar({ children, uploadAction, deleteAction, imag
                     <form action={uploadAction}>
                         <Image src={imageSrc} alt={imageAlt ?? "Avatar"} width={500} height={500} />
                         <label htmlFor={uploadId} className="absolute top-0 left-0 flex justify-center items-center h-full w-full
-                    bg-dark-950 transition-opacity opacity-0 hover:opacity-100 hover:bg-opacity-80 cursor-pointer">
+                    bg-dark-950 transition opacity-0 hover:opacity-100 hover:bg-opacity-80 cursor-pointer">
                             <div className="text-sm text-bright">
                                 {children}
                             </div>
@@ -38,8 +38,8 @@ export default function InputAvatar({ children, uploadAction, deleteAction, imag
                 </div>
             </div>
 
-            <form action={deleteAction} className="flex justify-center">
-                <SubmitButton design="negative" className="text-xs">
+            <form action={deleteAction}>
+                <SubmitButton appearance="negative" className="text-xs w-full">
                     Remove
                 </SubmitButton>
             </form>

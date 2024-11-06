@@ -57,7 +57,7 @@ export async function createPassword(state: CreatePasswordState, formData: FormD
 
         switch (response.status) {
             case 200:
-                revalidatePath("/account")
+                revalidatePath("/dashboard/account")
 
                 return {
                     result: { status: "success" }

@@ -30,7 +30,7 @@ export async function revokeAuthorization(state: RevokeAuthorizationState, formD
             case 204:
 
                 revalidateTag(`users:${state.authorization.user_id}:authorizations`)
-                revalidatePath("/account/authorizations")
+                revalidatePath("/dashboard/account/connections")
 
                 return {
                     authorization: state.authorization,
