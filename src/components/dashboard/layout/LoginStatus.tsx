@@ -1,5 +1,5 @@
 import { auth, signIn } from "@/auth"
-import { fetchCurrentUser } from "@/data/account"
+import { fetchUserById } from "@/data/account"
 import Image from "next/image"
 import { Suspense } from "react"
 
@@ -27,7 +27,7 @@ async function LoginStatus_() {
         return <LoginButton />
     }
 
-    const result = await fetchCurrentUser(session)
+    const result = await fetchUserById(session)
 
     if (result.status !== "success") {
         return <LoginButton />

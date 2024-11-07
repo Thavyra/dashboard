@@ -8,6 +8,7 @@ export default interface Application {
     description: string | null
 
     client_id?: string
+    is_confidential?: boolean
 
     created_at: Date
 

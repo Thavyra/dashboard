@@ -3,6 +3,7 @@
 import { auth } from "@/auth"
 import { postBackend } from "@/data/fetch"
 import Application from "@/models/Application"
+import { revalidatePath } from "next/cache"
 import { z } from "zod"
 
 export interface CreateApplicationState {
@@ -32,7 +33,7 @@ export async function createApplication(state: CreateApplicationState, formData:
 
     const validationResult = CreateApplicationValidator.safeParse({
         name: formData.get("name"),
-        type: formData.get("type")
+        type: "native"
     })
 
     if (!validationResult.success) {
@@ -50,6 +51,8 @@ export async function createApplication(state: CreateApplicationState, formData:
 
         switch (response.status) {
             case 201:
+                revalidatePath("/dashboard/dev/applications")
+
                 return {
                     result: {
                         status: "success",

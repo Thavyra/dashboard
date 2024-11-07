@@ -5,13 +5,13 @@ import { Transaction } from "@/models/Transaction";
 import { Authorization } from "@/models/Authorization";
 import { Login } from "@/models/Login";
 
-export async function fetchCurrentUser(session: Session): Promise<{
+export async function fetchUserById(session: Session, userId?: string): Promise<{
     status: "success"
     user: User
 } | {
     status: "failed"
 }> {
-    const response = await getBackend<User>(session, `/users/${session.user?.id}`)
+    const response = await getBackend<User>(session, `/users/${userId ?? session.user?.id}`)
 
     switch (response.status) {
         case 200:

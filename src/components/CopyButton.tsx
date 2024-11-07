@@ -7,7 +7,7 @@ export interface CopyButtonProps extends ButtonProps {
     text: string
 }
 
-export default function CopyButton({ text, ...props }: CopyButtonProps) {
+export default function CopyButton({ text, children, ...props }: CopyButtonProps) {
     const [copied, setCopied] = useState(false)
 
     const writeText = async () => {
@@ -22,7 +22,7 @@ export default function CopyButton({ text, ...props }: CopyButtonProps) {
         <Button appearance={copied ? "positive" : undefined} onClick={writeText} {...props}>
             {
                 copied ? <>Copied!</>
-                : <>Copy</>
+                : children ?? <>Copy</>
             }
         </Button>
     )

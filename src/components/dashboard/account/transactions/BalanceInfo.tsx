@@ -1,5 +1,5 @@
 import { auth } from "@/auth";
-import { fetchCurrentUser } from "@/data/account";
+import { fetchUserById } from "@/data/account";
 import { Suspense } from "react";
 
 export default function BalanceInfo() {
@@ -23,7 +23,7 @@ async function BalanceInfo_() {
         return null
     }
 
-    const result = await fetchCurrentUser(session)
+    const result = await fetchUserById(session)
 
     if (result.status !== "success") {
         return null

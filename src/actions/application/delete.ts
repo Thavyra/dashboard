@@ -75,7 +75,7 @@ export async function deleteApplication(state: DeleteApplicationState, formData:
 
     } finally {
         if (doRedirect) {
-            redirect("/dev/applications")
+            redirect("/dashboard/dev/applications")
         }
     }
 }

@@ -1,5 +1,5 @@
 import { auth } from "@/auth";
-import { fetchCurrentUser } from "@/data/account";
+import { fetchUserById } from "@/data/account";
 import { Suspense } from "react";
 import UsernameForm from "./UsernameForm";
 import DescriptionForm from "./DescriptionForm";
@@ -19,7 +19,7 @@ async function ProfileInfo_() {
         return null
     }
 
-    const result = await fetchCurrentUser(session)
+    const result = await fetchUserById(session)
 
     if (result.status !== "success") {
         return null

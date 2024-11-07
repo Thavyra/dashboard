@@ -1,3 +1,9 @@
+import SidebarLayout from "./layout";
+
 export default function Default() {
-    return null
+    return (
+        <SidebarLayout>
+            <></>
+        </SidebarLayout>
+    )
 }
