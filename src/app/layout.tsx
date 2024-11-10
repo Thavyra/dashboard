@@ -15,7 +15,7 @@ export default async function RootLayout({
     <html lang="en">
       <body className="antialiased box-border bg-dark-850 text-light">
 
-        <div className="container xl:max-w-7xl mx-auto">
+        <div className="w-full md:container xl:max-w-7xl mx-auto">
           {children}
         </div>
 

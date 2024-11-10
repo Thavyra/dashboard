@@ -6,18 +6,18 @@ import { ReactNode } from "react";
 
 export default function DashboardLayout({ children, sidebar }: { children: ReactNode, sidebar: ReactNode }) {
     return (
-        <div className="min-h-screen py-10 flex flex-col">
-            <div className="grow flex flex-row rounded-lg overflow-hidden">
+        <div className="min-h-screen md:py-10 flex flex-col">
+            <div className="grow flex flex-col sm:flex-row md:rounded-lg overflow-hidden">
                 <Sidebar>
                     {sidebar}
                 </Sidebar>
-                <main className="grow flex flex-col px-8 pt-8 bg-dark-800">
+                <main className="grow flex flex-col px-8 pt-5 sm:pt-8 bg-dark-800">
                     <div className="grow">
                         {children}
                     </div>
 
                     <Footer>
-                        <nav className="flex flex-row gap-3">
+                        <nav className="flex flex-row gap-3 justify-center sm:justify-start">
                             <NavLink href="/dashboard/account" match="prefix" activeClassName="font-bold">Account</NavLink>
                             <NavLink href="/dashboard/dev" match="prefix" activeClassName="font-bold">Developer</NavLink>
                             <form action={async () => {

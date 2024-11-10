@@ -8,8 +8,8 @@ export default function Page() {
 
             <hr className="border-dark-700 my-5" />
 
-            <section className="sm:flex sm:flex-row">
-                <div className="mb-3 sm:mr-3">
+            <section className="lg:flex lg:flex-row">
+                <div className="mb-3 mr-3">
                     <AvatarInfo />
                 </div>
 

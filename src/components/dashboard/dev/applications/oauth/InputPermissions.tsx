@@ -12,7 +12,7 @@ export interface InputPermissionsProps {
 export default function InputPermissions({ value, permissions, valid }: InputPermissionsProps) {
     return (
         <div className={`p-5 rounded-lg bg-dark-900 shadow-md transition ${getValidClass(valid)}`}>
-            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-3">
+            <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-4 gap-3">
                 {permissions.map(permission => {
                     return (
                         <InputCheckBox key={permission.name} id={permission.name} name={permission.name}

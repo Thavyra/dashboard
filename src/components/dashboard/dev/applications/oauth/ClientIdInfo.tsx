@@ -4,7 +4,7 @@ import Application from "@/models/Application";
 
 export default function ClientIdInfo({ application }: { application: Application | null }) {
     return (
-        <div className="basis-full md:basis-1/2 xl:basis-1/3 md:border-r md:border-dark-700">
+        <div className="basis-full md:basis-1/2 xl:basis-1/3 lg:border-r lg:border-dark-700">
             <h4 className="text-lg">Client ID</h4>
             <div className="font-mono">{application?.client_id}</div>
             {application?.client_id

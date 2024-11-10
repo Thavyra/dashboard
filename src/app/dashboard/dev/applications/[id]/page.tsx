@@ -7,8 +7,11 @@ export default function Page({ params }: { params: { id: string } }) {
             <h2 className="text-3xl font-light">Details</h2>
             <hr className="border-dark-700 my-5" />
 
-            <div className="flex flex-row">
-                <IconForm applicationId={params.id} />
+            <div className="lg:flex lg:flex-row">
+                <div className="mb-3 mr-3">
+                    <IconForm applicationId={params.id} />
+                </div>
+
                 <ApplicationInfo applicationId={params.id} />
             </div>
         </>

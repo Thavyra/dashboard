@@ -56,7 +56,7 @@ export default function Modal({ children, show, setShow }: ModalProps) {
     return (
         <div role="dialog"
         className={`${visible ? "bg-opacity-50" : "opacity-0"} absolute left-0 top-0 h-full w-full ease-out duration-300 bg-black bg-opacity-50`}>
-            <div ref={bodyRef} autoFocus className="relative h-auto w-full sm:max-w-[500px] mx-auto my-20 rounded-md overflow-hidden bg-dark-800 shadow-md">
+            <div ref={bodyRef} autoFocus className="relative h-auto w-full sm:max-w-[500px] mx-auto sm:my-20 sm:rounded-md overflow-hidden bg-dark-800 shadow-md">
                 <ModalContext.Provider value={{ close }}>
                     {children}
                 </ModalContext.Provider>

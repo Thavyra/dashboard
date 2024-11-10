@@ -4,10 +4,10 @@ import CreateApplicationButton from "@/components/dashboard/dev/applications/cre
 export default function Applications() {
     return (
         <>
-            <div className="flex flex-row">
-                <h2 className="font-light text-3xl">Applications</h2>
-                <div className="relative grow">
-                    <CreateApplicationButton className="absolute right-0 bottom-0" />
+            <div className="flex flex-col gap-4 md:flex-row">
+                <h2 className="font-light text-3xl text-center md:text-left">Applications</h2>
+                <div className="md:relative md:grow">
+                    <CreateApplicationButton className="w-full sm:w-auto mx-auto md:absolute md:right-0 md:bottom-0" />
                 </div>
             </div>
 

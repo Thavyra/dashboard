@@ -27,8 +27,8 @@ async function ApplicationInfo_({ applicationId }: { applicationId: string }) {
             return (
                 <div className="grow">
                     <DetailsForm application={result.application} />
-                    <div className="flex flex-row justify-end">
-                        <DeleteApplicationButton application={result.application} />
+                    <div className="flex flex-row md:justify-end mt-3">
+                        <DeleteApplicationButton application={result.application} className="w-full sm:w-auto" />
                     </div>
                 </div>
 

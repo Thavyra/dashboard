@@ -11,7 +11,7 @@ export default function ClientDetails({ applicationId }: { applicationId: string
             <h3 className="text-2xl font-light mb-3">Client Details</h3>
 
             <div className="p-5 rounded-lg bg-dark-900 shadow-md">
-                <div className="flex flex-row gap-3">
+                <div className="flex flex-col lg:flex-row gap-3">
                     <Suspense fallback={<Skeleton />}>
                         <ClientDetails_ applicationId={applicationId} />
                     </Suspense>
@@ -25,7 +25,7 @@ export default function ClientDetails({ applicationId }: { applicationId: string
 function Skeleton() {
     return (
         <>
-            <div className="basis-full md:basis-1/2 xl:basis-1/3 md:border-r md:border-dark-700">
+            <div className="basis-full md:basis-1/2 xl:basis-1/3 lg:border-r lg:border-dark-700">
                 <h4 className="text-lg">Client ID</h4>
                 <div className="inline-block w-1 h-4 py-0.5 px-1"></div>
                 <Button disabled className="text-sm mt-1">Copy</Button>
