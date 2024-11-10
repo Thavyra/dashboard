@@ -7,6 +7,10 @@ const config: Config = {
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
+    backgroundSize: {
+      '400%': "300% 300%"
+    },
+
     extend: {
       colors: {
         transparent: 'transparent',
@@ -52,6 +56,17 @@ const config: Config = {
           hover: '#a16207'
         }
       },
+
+      animation: {
+        gradient: 'gradient 25s ease-in-out infinite'
+      },
+
+      keyframes: {
+        gradient: {
+          '0%, 100%': { "background-position": "0 50%" },
+          '50%': { "background-position": "100% 50%" }
+        }
+      }
     },
   },
   plugins: [],

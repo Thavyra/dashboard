@@ -3,6 +3,7 @@ import { fetchUserById } from "@/data/account";
 import Score from "@/models/Score";
 import { DateTime } from "luxon";
 import Image from "next/image";
+import Link from "next/link";
 import { Suspense } from "react";
 
 export interface ScoreInfoProps {
@@ -14,8 +15,8 @@ export default function ScoreInfo({ score, highscore }: ScoreInfoProps) {
     const createdAt = DateTime.fromISO(score.created_at)
 
     return (
-        <tr className="transition hover:bg-dark-700">
-            <td className="px-4 py-3">
+        <tr>
+            <td className="p-2">
                 <div className="flex flex-row items-center gap-2 font-semibold">
                     <Suspense fallback={<Skeleton />}>
                         <ScoreInfo_ score={score} highscore={highscore} />
@@ -56,11 +57,14 @@ async function ScoreInfo_({ score, highscore }: ScoreInfoProps) {
 
     return (
         <>
-            <Image src={`/avatars/${result.user.id}`} alt={`${result.user.username} Avatar`}
-                width={500} height={500} className="size-7 rounded-full" />
-            <div className="text-bright">
-                {result.user.username ?? "Untitled User"}
-            </div>
+            <Link href={`/@${result.user.username}`}
+                className="flex flex-row items-center p-2 rounded transition bg-opacity-20 hover:bg-dark-700 hover:shadow-md active:bg-dark-750">
+                <Image src={`/avatars/${result.user.id}`} alt={`${result.user.username} Avatar`}
+                    width={500} height={500} className="size-7 rounded-full mr-2" />
+                <div className="text-bright">
+                    {result.user.username ?? "Untitled User"}
+                </div>
+            </Link>
             {score.score === highscore &&
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor"
                     className="size-5">

@@ -21,6 +21,18 @@ export async function fetchUserById(session: Session, userId?: string): Promise<
     }
 }
 
+export async function fetchUserByName(username: string): Promise<User | "NotFound"> {
+    const response = await fetch(`${process.env.THAVYRA_API_URL}/users/@${username}`, {
+        cache: 'no-cache'
+    })
+
+    if (response.ok) {
+        return await response.json() as User
+    }
+
+    return "NotFound"
+}
+
 export async function fetchLoginsByUser(session: Session): Promise<{
     status: "success"
     logins: Login[]
