@@ -1,14 +1,14 @@
 import { ReactNode } from "react"
 
 export interface LoginInfoProps {
-    color: string
+    className: string
     header: ReactNode
     children: ReactNode
 }
 
-export default function LoginInfo({ color, header, children }: LoginInfoProps) {
+export default function LoginInfo({ className, header, children }: LoginInfoProps) {
     return (
-        <div className={`rounded border border-${color}`}>
+        <div className={`rounded border ${className}`}>
 
             <div className="p-3 border-b border-dark-700">
                 {header}

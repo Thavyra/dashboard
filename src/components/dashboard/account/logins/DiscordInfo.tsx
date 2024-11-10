@@ -17,7 +17,7 @@ export interface DiscordInfoProps {
 
 export default function DiscordInfo({ error }: DiscordInfoProps) {
     return (
-        <LoginInfo color="[#5865F2]" header={
+        <LoginInfo className="border-[#5865F2]" header={
             <h4 className="text-[#5865F2] text-lg font-bold">
                 <Image src={discordLogo} alt="Discord" className="h-6 w-auto" />
             </h4>

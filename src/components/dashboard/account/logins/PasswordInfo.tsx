@@ -7,7 +7,7 @@ import CreatePasswordForm from "./CreatePasswordForm";
 
 export default function PasswordInfo() {
     return (
-        <LoginInfo color="cautious" header={
+        <LoginInfo className="border-cautious" header={
             <h4 className="text-cautious text-lg font-bold">Password</h4>
         }>
             <Suspense>

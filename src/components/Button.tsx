@@ -29,7 +29,7 @@ function getStyle(appearance?: ButtonAppearance) {
         case "positive":
             return "text-positive border-positive-dark hover:border-positive"
         case "cautious":
-            return "text-cautious border-cautious hover:border-cautious"
+            return "text-cautious border-cautious-dark hover:border-cautious"
         default:
             return "text-bright border-dark-700 hover:border-light"
         

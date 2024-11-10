@@ -53,7 +53,8 @@ const config: Config = {
         },
         'cautious': {
           DEFAULT: '#ca8a04',
-          hover: '#a16207'
+          hover: '#a16207',
+          dark: '#854d0e'
         }
       },
 

@@ -18,7 +18,7 @@ export interface GitHubInfoProps {
 
 export default function GitHubInfo({ error }: GitHubInfoProps) {
     return (
-        <LoginInfo color="bright" header={
+        <LoginInfo className="border-bright" header={
             <h4 className="flex flex-row items-center gap-1 text-bright text-lg font-bold">
                 <Image src={githubMark} alt="GitHub Logo" className="inline h-6 w-6" />
                 <Image src={githubLogo} alt="GitHub" className="inline h-7 w-auto" />
