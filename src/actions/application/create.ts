@@ -16,8 +16,8 @@ export interface CreateApplicationState {
 
 const CreateApplicationValidator = z.object({
     name: z.string()
-        .min(1)
-        .max(40),
+        .min(1, "Required")
+        .max(40, "Too long!"),
     type: z.enum(["native", "web"])
 })
 

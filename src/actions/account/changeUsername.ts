@@ -16,9 +16,9 @@ export interface ChangeUsernameState {
 
 const UsernameValidator = z.object({
     username: z.string()
-        .min(1)
-        .max(40)
-        .regex(/^[a-zA-Z0-9_\-\'\.]+$/)
+        .min(1, "")
+        .max(40, "Too long!")
+        .regex(/^[a-zA-Z0-9_\-\'\.]+$/, "Invalid character.")
 })
 
 export async function validateUsername(username: string, currentUsername: string): Promise<{valid?: boolean, errors?: string[]}> {

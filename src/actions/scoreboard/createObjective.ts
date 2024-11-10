@@ -18,13 +18,15 @@ export interface CreateObjectiveState {
 
 const ObjectiveValidator = z.object({
     name: z.string()
-        .min(1)
-        .max(40)
-        .regex(/^[a-zA-Z0-9](?:[a-zA-Z0-9.]*[a-zA-Z0-9])?$/),
+        .min(1, "Required")
+        .max(40, "Too long!")
+        .regex(/^[a-zA-Z0-9]/, "Cannot start with special character.")
+        .regex(/[a-zA-Z0-9]$/, "Cannot end with special character.")
+        .regex(/^[a-zA-Z0-9](?:[a-zA-Z0-9.]*[a-zA-Z0-9])?$/, "Invalid character."),
 
     displayName: z.string()
-        .min(1)
-        .max(40)
+        .min(1, "Required")
+        .max(40, "Too long!")
 })
 
 export async function createObjective(state: CreateObjectiveState, formData: FormData): Promise<CreateObjectiveState> {

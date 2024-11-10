@@ -16,7 +16,7 @@ export default function DetailsForm({ application }: { application: Application 
             <div className="mb-3">
                 <label htmlFor="name" className="block mb-1.5">Name</label>
 
-                <InputText id="name" name="name" defaultValue={application.name}
+                <InputText id="name" name="name" defaultValue={application.name} required maxLength={40}
                     valid={state.errors?.name ? false : undefined} />
 
                 <span className="text-sm text-negative">
@@ -27,7 +27,7 @@ export default function DetailsForm({ application }: { application: Application 
             <div className="mb-3">
                 <label htmlFor="description" className="block mb-1.5">Description</label>
 
-                <InputTextArea rows={4} id="description" name="description" defaultValue={application.description ?? ""}
+                <InputTextArea rows={4} id="description" name="description" maxLength={400} defaultValue={application.description ?? ""}
                     valid={state.errors?.description ? false : undefined} />
 
                 <span className="text-sm text-negative">

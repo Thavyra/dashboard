@@ -25,8 +25,9 @@ export default function CreateObjectiveForm({ applicationId, submit, onCreated }
                         Name
                         <p className="text-sm">A unique name to reference the objective from code.</p>
                     </label>
-                    <InputText id="name" name="name" autoFocus
-                        valid={state.errors?.name?.length ?? 0 > 0 ? false : undefined} />
+                    <InputText id="name" name="name" autoFocus required maxLength={40}
+                        valid={state.errors?.name?.length ?? 0 > 0 ? false : undefined}
+                        className="font-mono" />
                     <span className="text-sm text-negative">{state.errors?.name?.at(0)}</span>
                 </section>
 
@@ -35,7 +36,7 @@ export default function CreateObjectiveForm({ applicationId, submit, onCreated }
                         Display Name
                         <p className="text-sm">Publicly visible name describing the objective.</p>
                     </label>
-                    <InputText id="displayName" name="displayName"
+                    <InputText id="displayName" name="displayName" required maxLength={40}
                         valid={state.errors?.displayName?.length ?? 0 > 0 ? false : undefined} />
                     <span className="text-sm text-negative">{state.errors?.displayName}</span>
                 </section>

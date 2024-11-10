@@ -19,10 +19,10 @@ export interface UpdateApplicationState {
 
 const UpdateApplicationValidator = z.object({
     name: z.string()
-        .min(1)
-        .max(40),
+        .min(1, "Required")
+        .max(40, "Too long!"),
     description: z.string()
-        .max(400)
+        .max(400, "Too much text!")
         .optional()
 })
 

@@ -16,7 +16,7 @@ export interface ChangeDescriptionState {
 
 const DescriptionValidator = z.object({
     description: z.string()
-        .max(400)
+        .max(400, "Too much text!")
         .optional()
 })
 

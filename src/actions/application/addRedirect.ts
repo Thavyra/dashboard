@@ -17,7 +17,8 @@ export interface AddRedirectState {
 
 const RedirectValidator = z.object({
     uri: z.string()
-        .url()
+        .min(1, "Required")
+        .url("Not a valid URI")
 })
 
 export async function addRedirect(state: AddRedirectState, formData: FormData): Promise<AddRedirectState> {

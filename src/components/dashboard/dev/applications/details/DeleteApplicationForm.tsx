@@ -25,7 +25,7 @@ export default function DeleteApplicationForm({ application, submit }: DeleteApp
                     <label htmlFor="deleteName" className="block mb-1.5 text-sm">
                         Enter your application's name ({application.name}) to confirm you want to delete it.
                     </label>
-                    <InputText id="deleteName" name="name" autoFocus
+                    <InputText id="deleteName" name="name" autoFocus required
                         valid={state.errors?.name?.length ?? 0 > 0 ? false : undefined} />
                     <span className="text-sm text-negative">
                         {state.errors?.name?.at(0)}

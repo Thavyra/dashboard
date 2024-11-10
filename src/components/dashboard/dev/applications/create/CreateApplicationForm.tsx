@@ -23,7 +23,7 @@ export default function CreateApplicationForm({submit}: CreateApplicationFormPro
 
             <section className="px-5">
                 <label htmlFor="name" className="block mb-1.5">Name</label>
-                <InputText id="name" name="name" autoFocus
+                <InputText id="name" name="name" autoFocus required maxLength={40}
                     valid={state.result?.status === "failed" ? false : undefined} />
                 <span className="text-sm text-negative">
                     {state.errors?.name?.at(0)}

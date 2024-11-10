@@ -13,7 +13,7 @@ export default function DescriptionForm({ description }: { description: string |
             <div className="mb-3">
                 <label htmlFor="description" className="block mb-1.5">Description</label>
 
-                <InputTextArea rows={4} id="description" name="description"
+                <InputTextArea rows={10} id="description" name="description" maxLength={400}
                     valid={state.errors?.description ? false : undefined} defaultValue={description ?? ""} />
 
                 <span className="text-sm text-negative">{state.errors?.description}</span>

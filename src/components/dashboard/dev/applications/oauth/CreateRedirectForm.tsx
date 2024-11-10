@@ -2,7 +2,6 @@
 
 import { addRedirect } from "@/actions/application/addRedirect"
 import InputText from "@/components/forms/InputText"
-import SubmitButton from "@/components/forms/SubmitButton"
 import { useRef } from "react"
 import { useFormState } from "react-dom"
 
@@ -18,7 +17,7 @@ export default function CreateRedirectForm({ applicationId }: { applicationId: s
     return (
         <form action={formAction} ref={form}>
             <div className="flex flex-row">
-                <InputText id="uri" name="uri" placeholder="https://example.com/callback"
+                <InputText id="uri" name="uri" placeholder="https://example.com/callback" required maxLength={2048}
                     valid={state.errors?.uri?.length ?? 0 > 0 ? false : undefined} />
                 <button type="submit" className="p-0.5 transition text-bright hover:text-light"
                 aria-label="Add">
