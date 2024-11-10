@@ -30,12 +30,12 @@ async function ApplicationTitle_({ transaction }: { transaction: Transaction }) 
     switch (result.status) {
         case "success":
             return (
-                <>
+                <div className="flex items-center">
                     <Image src={`/application_icons/${result.application.id}`} alt="Icon" height={500} width={500} 
                     className="h-8 w-8 mr-2 rounded-full" />
 
                     <div className="text-lg text-bright font-semibold">{result.application.name}</div>
-                </>
+                </div>
             )
         case "notfound":
             return (

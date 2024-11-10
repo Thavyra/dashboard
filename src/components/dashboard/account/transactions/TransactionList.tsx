@@ -2,6 +2,8 @@ import { auth } from "@/auth";
 import { fetchTransactionsByUser } from "@/data/account";
 import TransactionInfo from "./TransactionInfo";
 import { Suspense } from "react";
+import TransferInfo from "./TransferInfo";
+import { DateTime } from "luxon";
 
 export default function TransactionList() {
     return (
@@ -27,9 +29,9 @@ async function TransactionList_() {
     return (
         <div className="flex flex-col gap-3">
             {result.transactions.map(transaction => {
-                return (
-                    <TransactionInfo key={transaction.id} transaction={transaction} />
-                )
+                return transaction.is_transfer
+                    ? <TransferInfo transfer={transaction} currentUser={session.user?.id} />
+                    : <TransactionInfo transaction={transaction} />
             })}
         </div>
     )
