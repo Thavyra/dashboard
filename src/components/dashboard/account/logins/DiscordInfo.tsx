@@ -59,7 +59,10 @@ async function DiscordInfo_({ error }: DiscordInfoProps) {
                     : <span>No account linked.</span>
                 }
             </div>
-            <form action={async () => linkProvider("discord")}>
+            <form action={async () => {
+                "use server"
+                await linkProvider("discord")
+            }}>
                 <Button type="submit" className="text-base">Add</Button>
             </form>
         </div>
