@@ -4,6 +4,7 @@ import { getBackend } from "./fetch";
 import { Transaction, Transfer } from "@/models/Transaction";
 import { Authorization } from "@/models/Authorization";
 import { Login } from "@/models/Login";
+import { Scope } from "@/models/Scope";
 
 export async function fetchUserById(session: Session, userId?: string): Promise<{
     status: "success"
@@ -80,6 +81,22 @@ export async function fetchAuthorizationsByUser(session: Session): Promise<{
     switch (response.status) {
         case 200:
             return { status: "success", authorizations: response.data }
+        default:
+            return { status: "failed" }
+    }
+}
+
+export async function fetchScopesByAuthorization(session: Session, authorization: Authorization): Promise<{
+    status: "success"
+    scopes: Scope[]
+} | {
+    status: "failed"
+}> {
+    const response = await getBackend<Scope[]>(session, `/authorizations/${authorization.id}/scopes`)
+
+    switch (response.status) {
+        case 200:
+            return { status: "success", scopes: response.data }
         default:
             return { status: "failed" }
     }

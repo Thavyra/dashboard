@@ -42,7 +42,7 @@ export default function ApplicationSelectorDropdown({ application, userApplicati
                 className={`${showDropdown ? "block" : "hidden"} absolute w-full rounded-b overflow-hidden bg-dark-800 shadow-lg`}>
                 {userApplications.map(a => {
                     return (
-                        <NavLink href={`/dashboard/dev/applications/${a.id}`} match="prefix"
+                        <NavLink key={a.id} href={`/dashboard/dev/applications/${a.id}`} match="prefix"
                             className={`block p-3 transition hover:bg-dark-700`} activeClassName="bg-dark-750">
 
                             <div className="flex flex-row gap-2 items-center text-lg text-bright">
