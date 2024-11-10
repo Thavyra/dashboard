@@ -35,9 +35,7 @@ async function PermissionsInfo_({ applicationId }: { applicationId: string }) {
         return null
     }
 
-    const permissions = result.permissions.map(x => x.name)
-
     return (
-        <PermissionsForm applicationId={applicationId} currentPermissions={permissions} />
+        <PermissionsForm applicationId={applicationId} currentPermissions={result.permissions} />
     )
 }

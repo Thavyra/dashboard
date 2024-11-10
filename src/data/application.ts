@@ -62,11 +62,11 @@ export async function fetchRedirectsByApplication(session: Session, applicationI
 
 export async function fetchPermissionsByApplication(session: Session, applicationId: string): Promise<{
     status: "success"
-    permissions: Permission[]
+    permissions: string[]
 } | {
     status: "failed"
 }> {
-    const response = await getBackend<Permission[]>(session, `/applications/${applicationId}/permissions`, {
+    const response = await getBackend<string[]>(session, `/applications/${applicationId}/permissions`, {
         next: {
             tags: [`application:${applicationId}:permissions`]
         }

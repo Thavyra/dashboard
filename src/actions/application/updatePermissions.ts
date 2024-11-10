@@ -58,17 +58,13 @@ export async function updatePermissions(state: UpdatePermissionsState, formData:
     const permissions = Object.entries(validationResult.data)
 
     const request = {
-        permissions: {
-            grant: permissions.filter(x => x[1] === "on").map(x => x[0]),
-            deny: permissions.filter(x => !x[1]).map(X => X[0])
-        }
+        grant: permissions.filter(x => x[1] === "on").map(x => x[0]),
+        deny: permissions.filter(x => !x[1]).map(X => X[0])
     }
-
-    console.log(request)
 
     try {
 
-        const response = await patchBackend<Application>(session, `/applications/${state.applicationId}`, request)
+        const response = await putBackend<string[]>(session, `/applications/${state.applicationId}/permissions`, request)
 
         switch (response.status) {
             case 200:
@@ -76,7 +72,7 @@ export async function updatePermissions(state: UpdatePermissionsState, formData:
 
                 return {
                     applicationId: state.applicationId,
-                    currentPermissions: response.data.permissions?.map(x => x.name) ?? [],
+                    currentPermissions: response.data,
                     result: { status: "success" }
                 }
 
