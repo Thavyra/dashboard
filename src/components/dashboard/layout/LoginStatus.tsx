@@ -13,9 +13,9 @@ export default function LoginStatus() {
 
 function Skeleton() {
     return (
-        <div className="flex flex-row gap-2 text-dark-700">
+        <div className="flex flex-row justify-center gap-2">
             <div className="rounded-full h-6 w-6 bg-dark-700 animate-pulse"></div>
-            Username
+            <div className="h-5 w-20 rounded bg-dark-700 animate-pulse"></div>
         </div>
     )
 }
@@ -38,7 +38,10 @@ async function LoginStatus_() {
     return (
         <div className="flex flex-row justify-center gap-2 text-bright">
             <Image src={`/avatars/${user.id}`} alt="Avatar" height={500} width={500} className="rounded-full h-6 w-6" />
-            {user.username ?? session.user?.name}
+            <div className="truncate">
+                {user.username ?? session.user?.name}
+            </div>
+
         </div>
     )
 }
