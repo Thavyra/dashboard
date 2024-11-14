@@ -38,7 +38,7 @@ async function ConnectionPermissionInfo_({ authorization }: ConnectionPermission
         <ul className="ml-4 list-disc list-outside">
             {result.scopes.map(scope => {
                 return (
-                    <li>{scope.description}</li>
+                    <li key={scope.name}>{scope.description}</li>
                 )
             })}
         </ul>
