@@ -31,6 +31,6 @@ async function ObjectiveList_({ applicationId }: ObjectiveListProps) {
     }
 
     return result.objectives.map(objective => {
-        return <ObjectiveInfo objective={objective} />
+        return <ObjectiveInfo key={objective.id} objective={objective} />
     })
 }

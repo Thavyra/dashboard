@@ -11,7 +11,7 @@ export interface DeleteRedirectState {
     message?: string
 }
 
-export async function deleteRedirect(state: DeleteRedirectState, formData: FormData): Promise<DeleteRedirectState> {
+export async function deleteRedirect(state: DeleteRedirectState, _: FormData): Promise<DeleteRedirectState> {
     const session = await auth()
 
     if (!session) {

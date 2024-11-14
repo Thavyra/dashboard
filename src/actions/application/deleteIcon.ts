@@ -10,7 +10,7 @@ export interface DeleteIconState {
     message?: string
 }
 
-export async function deleteIcon(state: DeleteIconState, formData: FormData): Promise<DeleteIconState> {
+export async function deleteIcon(state: DeleteIconState, _: FormData): Promise<DeleteIconState> {
     const session = await auth()
 
     if (!session) {

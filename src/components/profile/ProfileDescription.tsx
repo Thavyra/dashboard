@@ -9,7 +9,7 @@ export interface ProfileDescriptionProps {
 
 export default function ProfileDescription({ user }: ProfileDescriptionProps) {
     return (
-        <Markdown children={user.description}
+        <Markdown
             remarkPlugins={[[remarkMentions as any, {
                 usernameLink: (name: string) => {
                     return `/@${name}`
@@ -49,6 +49,8 @@ export default function ProfileDescription({ user }: ProfileDescriptionProps) {
                         </Link>
                     )
                 },
-            }} />
+            }}>
+                {user.description}
+            </Markdown>
     )
 }

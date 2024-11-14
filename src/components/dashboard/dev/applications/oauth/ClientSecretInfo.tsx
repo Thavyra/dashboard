@@ -1,7 +1,6 @@
 "use client"
 
 import { resetClientSecret } from "@/actions/application/resetSecret";
-import Button from "@/components/Button";
 import CopyButton from "@/components/CopyButton";
 import SubmitButton from "@/components/forms/SubmitButton";
 import Application from "@/models/Application";

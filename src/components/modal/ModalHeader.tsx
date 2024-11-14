@@ -1,6 +1,5 @@
 "use client"
 
-import { useRouter } from "next/router";
 import { ReactNode, useContext } from "react";
 import { ModalContext } from "./Modal";
 

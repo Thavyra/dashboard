@@ -1,4 +1,4 @@
-import { Transaction, Transfer } from "@/models/Transaction";
+import { Transaction } from "@/models/Transaction";
 import ApplicationTitle from "./ApplicationTitle";
 import TransactionLayout from "./TransactionLayout";
 import { DateTime } from "luxon";

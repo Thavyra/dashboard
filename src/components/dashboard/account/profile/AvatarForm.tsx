@@ -7,7 +7,7 @@ import { useFormState } from "react-dom"
 
 export default function AvatarForm({ userId }: { userId: string }) {
     const [uploadState, uploadAction] = useFormState(changeAvatar, { userId })
-    const [deleteState, deleteAction] = useFormState(deleteAvatar, { userId })
+    const [, deleteAction] = useFormState(deleteAvatar, { userId })
 
     const cacheQuery = (uploadState.cacheVersion ? `?v=${uploadState.cacheVersion}` : "")
 

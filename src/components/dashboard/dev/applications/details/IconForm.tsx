@@ -7,7 +7,7 @@ import { useFormState } from "react-dom";
 
 export default function IconForm({ applicationId }: { applicationId: string }) {
     const [uploadState, uploadAction] = useFormState(changeIcon, { applicationId })
-    const [deleteState, deleteAction] = useFormState(deleteIcon, { applicationId })
+    const [, deleteAction] = useFormState(deleteIcon, { applicationId })
 
     const cacheQuery = (uploadState.cacheVersion ? `?v=${uploadState.cacheVersion}` : "")
 

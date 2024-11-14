@@ -2,7 +2,6 @@ import { Session } from "next-auth";
 import { getBackend } from "./fetch";
 import Application from "@/models/Application";
 import Redirect from "@/models/Redirect";
-import Permission from "@/models/Permission";
 
 export async function fetchApplicationsByUser(session: Session): Promise<{
     status: "success"

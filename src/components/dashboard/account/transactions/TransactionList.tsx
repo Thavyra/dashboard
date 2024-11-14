@@ -3,7 +3,6 @@ import { fetchTransactionsByUser } from "@/data/account";
 import TransactionInfo from "./TransactionInfo";
 import { Suspense } from "react";
 import TransferInfo from "./TransferInfo";
-import { DateTime } from "luxon";
 
 export default function TransactionList() {
     return (

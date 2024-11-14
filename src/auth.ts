@@ -1,12 +1,8 @@
 import NextAuth, { type DefaultSession } from "next-auth";
 import { type JWT } from "next-auth/jwt";
 import { env } from "next-runtime-env";
-import { NextResponse } from "next/server";
 
 declare module "next-auth" {
-    interface User {
-    }
-
     interface Session {
         error?: "RefreshTokenError",
         access_token: string
@@ -25,6 +21,7 @@ declare module "next-auth/jwt" {
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
     secret: env("AUTH_SECRET"),
+    trustHost: true,
 
     basePath: "/auth/internal",
     

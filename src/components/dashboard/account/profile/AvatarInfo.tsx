@@ -9,6 +9,6 @@ export default async function AvatarInfo() {
     }
 
     return (
-        <AvatarForm userId={session.user?.id!} />
+        <AvatarForm userId={session.user!.id!} />
     )
 }

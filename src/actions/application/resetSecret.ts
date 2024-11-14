@@ -9,7 +9,7 @@ export interface ResetClientSecretState {
     message?: string
 }
 
-export async function resetClientSecret(state: ResetClientSecretState, formData: FormData): Promise<ResetClientSecretState> {
+export async function resetClientSecret(state: ResetClientSecretState, _: FormData): Promise<ResetClientSecretState> {
     const session = await auth()
 
     if (!session) {

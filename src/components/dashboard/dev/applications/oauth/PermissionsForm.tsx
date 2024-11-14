@@ -32,90 +32,93 @@ const permissions = [
     }
 ]
 
-const adminPermissions = {
-    scopes: [
-        {
-            permissionName: "scp:sudo",
-            displayName: "sudo"
-        },
-        {
-            permissionName: "scp:admin",
-            displayName: "admin"
-        },
-        {
-            permissionName: "scp:link_provider",
-            displayName: "link_provider"
-        },
-        {
-            permissionName: "scp:account",
-            displayName: "account"
-        },
-        {
-            permissionName: "scp:account.logins",
-            displayName: "account.logins"
-        },
-        {
-            permissionName: "scp:authorizations",
-            displayName: "authorizations"
-        },
-        {
-            permissionName: "scp:authorizations.read",
-            displayName: "authorizations.read"
-        }
-    ],
+// Commented to keep TS happy.
+// This will be introduced in the future
 
-    endpoints: [
-        {
-            permissionName: "ept:authorization",
-            displayName: "Authorization"
-        },
-        {
-            permissionName: "ept:token",
-            displayName: "Token"
-        },
-        {
-            permissionName: "ept:logout",
-            displayName: "Logout"
-        }
-    ],
+// const adminPermissions = {
+//     scopes: [
+//         {
+//             permissionName: "scp:sudo",
+//             displayName: "sudo"
+//         },
+//         {
+//             permissionName: "scp:admin",
+//             displayName: "admin"
+//         },
+//         {
+//             permissionName: "scp:link_provider",
+//             displayName: "link_provider"
+//         },
+//         {
+//             permissionName: "scp:account",
+//             displayName: "account"
+//         },
+//         {
+//             permissionName: "scp:account.logins",
+//             displayName: "account.logins"
+//         },
+//         {
+//             permissionName: "scp:authorizations",
+//             displayName: "authorizations"
+//         },
+//         {
+//             permissionName: "scp:authorizations.read",
+//             displayName: "authorizations.read"
+//         }
+//     ],
 
-    consentTypes: [
-        {
-            permissionName: "cst:implicit",
-            displayName: "Implicit"
-        }
-    ],
+//     endpoints: [
+//         {
+//             permissionName: "ept:authorization",
+//             displayName: "Authorization"
+//         },
+//         {
+//             permissionName: "ept:token",
+//             displayName: "Token"
+//         },
+//         {
+//             permissionName: "ept:logout",
+//             displayName: "Logout"
+//         }
+//     ],
 
-    responseTypes: [
-        {
-            permissionName: "rst:code",
-            displayName: "Code"
-        },
-        {
-            permissionName: "rst:id_token",
-            displayName: "ID Token"
-        }
-    ],
+//     consentTypes: [
+//         {
+//             permissionName: "cst:implicit",
+//             displayName: "Implicit"
+//         }
+//     ],
 
-    grantTypes: [
-        {
-            permissionName: "gt:authorization_code",
-            displayName: "Authorization Code"
-        },
-        {
-            permissionName: "gt:client_credentials",
-            displayName: "Client Credentials"
-        },
-        {
-            permissionName: "gt:refresh_token",
-            displayName: "Refresh Token"
-        },
-        {
-            permissionName: "gt:implicit",
-            displayName: "Implicit"
-        }
-    ]
-}
+//     responseTypes: [
+//         {
+//             permissionName: "rst:code",
+//             displayName: "Code"
+//         },
+//         {
+//             permissionName: "rst:id_token",
+//             displayName: "ID Token"
+//         }
+//     ],
+
+//     grantTypes: [
+//         {
+//             permissionName: "gt:authorization_code",
+//             displayName: "Authorization Code"
+//         },
+//         {
+//             permissionName: "gt:client_credentials",
+//             displayName: "Client Credentials"
+//         },
+//         {
+//             permissionName: "gt:refresh_token",
+//             displayName: "Refresh Token"
+//         },
+//         {
+//             permissionName: "gt:implicit",
+//             displayName: "Implicit"
+//         }
+//     ]
+// }
 
 export interface PermissionsFormProps {
     applicationId: string

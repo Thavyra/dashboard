@@ -1,10 +1,6 @@
 import { Session } from "next-auth";
 import { env } from "next-runtime-env";
 
-type Body =
-    | { type: "json", data: any }
-    | { type: "form", data: FormData }
-
 type FetchResult =
     | OkResult
     | FailedResult
@@ -147,6 +143,8 @@ async function fetchBackend(session: Session, path: string, body?: any, init?: R
         } : data
 
     } catch (error) {
+
+        console.error(error)
 
         return {
             status: response.status

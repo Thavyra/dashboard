@@ -10,7 +10,7 @@ export interface DeleteAvatarState {
     message?: string
 }
 
-export async function deleteAvatar(state: DeleteAvatarState, formData: FormData): Promise<DeleteAvatarState> {
+export async function deleteAvatar(state: DeleteAvatarState, _: FormData): Promise<DeleteAvatarState> {
     const session = await auth()
 
     if (!session) {

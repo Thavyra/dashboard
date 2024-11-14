@@ -11,7 +11,7 @@ export interface RevokeAuthorizationState {
     message?: string
 }
 
-export async function revokeAuthorization(state: RevokeAuthorizationState, formData: FormData): Promise<RevokeAuthorizationState> {
+export async function revokeAuthorization(state: RevokeAuthorizationState, _: FormData): Promise<RevokeAuthorizationState> {
     const session = await auth()
 
     if (!session) {

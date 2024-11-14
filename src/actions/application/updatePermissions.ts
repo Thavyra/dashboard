@@ -1,8 +1,7 @@
 "use server"
 
 import { auth } from "@/auth"
-import { patchBackend, putBackend } from "@/data/fetch"
-import Application from "@/models/Application"
+import { putBackend } from "@/data/fetch"
 import { revalidateTag } from "next/cache"
 import { z } from "zod"
 

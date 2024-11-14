@@ -11,7 +11,7 @@ export interface DeleteObjectiveState {
     message?: string
 }
 
-export async function deleteObjective(state: DeleteObjectiveState, formData: FormData): Promise<DeleteObjectiveState> {
+export async function deleteObjective(state: DeleteObjectiveState, _: FormData): Promise<DeleteObjectiveState> {
     const session = await auth()
 
     if (!session) {
