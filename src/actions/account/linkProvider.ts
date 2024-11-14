@@ -9,7 +9,7 @@ export async function linkProvider(provider: "discord" | "github") {
     }))
 
     const redirectUri = new URL(url.searchParams.get("redirect_uri") ?? "")
-    redirectUri.pathname = "/dashboard/account"
+    redirectUri.pathname = "/dashboard/account/logins"
     url.searchParams.set("redirect_uri", redirectUri.href)
 
     url.searchParams.delete("code_challenge")
