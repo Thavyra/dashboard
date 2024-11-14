@@ -6,6 +6,12 @@ import { notFound } from "next/navigation";
 import Markdown from "react-markdown";
 import remarkMentions from "remark-mentions";
 
+import {Outfit} from "next/font/google"
+
+const outfit = Outfit({
+    subsets: ['latin']
+})
+
 type Props = { params: { username: string } }
 
 export async function generateMetadata({ params }: Props, parent: ResolvingMetadata): Promise<Metadata> {
@@ -102,7 +108,7 @@ export default async function Page({ params }: Props) {
                         }} />
                 </main>
                 <footer className="flex flex-row p-5 border-t border-dark-700 mt-3 bg-dark-900">
-                    <div className="mx-auto">Thavyra</div>
+                    <div className="mx-auto" style={outfit.style}>Thavyra</div>
                 </footer>
             </div>
         </div>
