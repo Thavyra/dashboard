@@ -5,7 +5,7 @@ export async function GET(request: NextRequest, { params }: { params: { id: stri
     const cacheVersion = request.nextUrl.searchParams.get("v")
 
     const response = await fetch(`${env("THAVYRA_API_URL")}/applications/${params.id}/icon.png`, {
-        next: { tags: [`avatars:${params.id}${(cacheVersion ? `:${cacheVersion}` : "")}`] }
+        next: { tags: [`application_icons:${params.id}${(cacheVersion ? `:${cacheVersion}` : "")}`] }
     })
 
     const blob = await response.blob()

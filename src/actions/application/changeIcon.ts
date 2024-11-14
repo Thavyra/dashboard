@@ -51,7 +51,10 @@ export async function changeIcon(state: ChangeIconState, formData: FormData): Pr
         const response = await putBackend(session, `/applications/${state.applicationId}/icon`, data)
 
         switch (response.status) {
-            case 200:
+            case 201:
+                revalidateTag(`application_icons:${state.applicationId}`)
+                revalidatePath(`/application_icons/${state.applicationId}`)
+
                 return {
                     applicationId: state.applicationId,
                     cacheVersion: Math.random().toString(5).substring(2, 9),

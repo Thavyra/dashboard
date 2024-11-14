@@ -2,6 +2,7 @@
 
 import { auth } from "@/auth"
 import { deleteBackend } from "@/data/fetch"
+import { revalidatePath, revalidateTag } from "next/cache"
 
 export interface DeleteIconState {
     applicationId: string
@@ -26,6 +27,9 @@ export async function deleteIcon(state: DeleteIconState, formData: FormData): Pr
 
         switch (response.status) {
             case 204:
+                revalidateTag(`application_icons:${state.applicationId}`)
+                revalidatePath(`/application_icons/${state.applicationId}`)
+
                 return {
                     applicationId: state.applicationId,
                     result: { status: "success" }
