@@ -2,7 +2,13 @@ import { signOut } from "@/auth";
 import Footer from "@/components/dashboard/layout/Footer";
 import Sidebar from "@/components/dashboard/layout/Sidebar";
 import NavLink from "@/components/nav/NavLink";
+import { Metadata } from "next";
 import { ReactNode } from "react";
+
+export const metadata: Metadata = {
+    title: "Thavyra · Dashboard",
+    description: "Manage your account, profile and applications."
+}
 
 export default function DashboardLayout({ children, sidebar }: { children: ReactNode, sidebar: ReactNode }) {
     return (
