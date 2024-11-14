@@ -5,6 +5,7 @@ import { Transaction, Transfer } from "@/models/Transaction";
 import { Authorization } from "@/models/Authorization";
 import { Login } from "@/models/Login";
 import { Scope } from "@/models/Scope";
+import { env } from "next-runtime-env";
 
 export async function fetchUserById(session: Session, userId?: string): Promise<{
     status: "success"
@@ -23,7 +24,7 @@ export async function fetchUserById(session: Session, userId?: string): Promise<
 }
 
 export async function fetchUserByName(username: string): Promise<User | "NotFound"> {
-    const response = await fetch(`${process.env.THAVYRA_API_URL}/users/@${username}`, {
+    const response = await fetch(`${env("THAVYRA_API_URL")}/users/@${username}`, {
         cache: 'no-cache'
     })
 

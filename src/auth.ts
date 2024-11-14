@@ -1,5 +1,6 @@
 import NextAuth, { type DefaultSession } from "next-auth";
 import { type JWT } from "next-auth/jwt";
+import { env } from "next-runtime-env";
 import { NextResponse } from "next/server";
 
 declare module "next-auth" {
@@ -23,14 +24,22 @@ declare module "next-auth/jwt" {
 }
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
+    secret: env("AUTH_SECRET"),
+
     basePath: "/auth/internal",
+    
     pages: {
         signIn: "/auth/login"
     },
+    
     providers: [{
         id: "thavyra",
         name: "Thavyra",
         type: "oidc",
+
+        issuer: env("AUTH_THAVYRA_ISSUER"),
+        clientId: env("AUTH_THAVYRA_ID"),
+        clientSecret: env("AUTH_THAVYRA_SECRET"),
 
         authorization: {
             params: {

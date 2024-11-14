@@ -1,4 +1,5 @@
 import { Session } from "next-auth";
+import { env } from "next-runtime-env";
 
 type Body =
     | { type: "json", data: any }
@@ -129,7 +130,7 @@ async function fetchBackend(session: Session, path: string, body?: any, init?: R
         }
     }
 
-    const response = await fetch(process.env.THAVYRA_API_URL + path, {
+    const response = await fetch(env("THAVYRA_API_URL") + path, {
         ...init,
         headers: headers,
         body: body instanceof FormData ? body
