@@ -3,4 +3,5 @@ export default interface User {
     username: string | null
     description: string | null
     balance: number
+    created_at: string
 }
