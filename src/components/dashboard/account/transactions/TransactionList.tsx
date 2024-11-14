@@ -30,8 +30,8 @@ async function TransactionList_() {
         <div className="flex flex-col gap-3">
             {result.transactions.map(transaction => {
                 return transaction.is_transfer
-                    ? <TransferInfo transfer={transaction} currentUser={session.user?.id} />
-                    : <TransactionInfo transaction={transaction} />
+                    ? <TransferInfo key={transaction.id} transfer={transaction} currentUser={session.user?.id} />
+                    : <TransactionInfo key={transaction.id} transaction={transaction} />
             })}
         </div>
     )
